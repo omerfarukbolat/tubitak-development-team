@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "Home",
+        "link": "/"
+    },
+    {
+        "id": 2,
+        "name": "Notes",
+        "link": "/notes"
+    },
+    {
+        "id": 3,
+        "name": "Todo",
+        "link": "/todo"
+    },
+    {
+        "id": 4,
+        "name": "Trello",
+        "link": "/trello"
+    }
+]
