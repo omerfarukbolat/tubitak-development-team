@@ -1,12 +1,18 @@
 .styled-input {
   display: inline-flex;
   flex-direction: column;
+  padding: 12px;
 }
 .styled-input-label {
-  color: black;
+  padding: inherit;
+  font-size: 14px;
+  color: #000000;
 }
 .styled-input-form {
-  border: solid gray 0.1rem;
+  border: solid black 0.1rem;
   border-radius: 0.2rem;
   font-size: 1.2rem;
+  color: #b9b9b9;
+  height: 30px;
+  width: 190px;
 }
