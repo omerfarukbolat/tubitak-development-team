@@ -1,7 +1,21 @@
-const Trello = () => {
+import React, { useState } from 'react';
+import Input from '../../components/input';
+
+const Trello: React.FC = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (newValue: string) => {
+    setInputValue(newValue);
+  };
+
   return (
     <div>
-      <h1>Trello App</h1>
+      <Input
+        value={inputValue}
+        placeholder=" Add a new task"
+        onChange={handleInputChange}
+      />
+      {inputValue}
     </div>
   );
 };

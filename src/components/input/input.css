@@ -1,0 +1,13 @@
+.styled-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  margin-top: 20px;
+}
+
+.styled-input-form {
+  border: solid gray 0.1rem;
+  border-radius: 0.2rem;
+  font-size: 1.2rem;
+}
