@@ -1,11 +1,10 @@
 .styled-input {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
-  margin-top: 20px;
+  display: inline-flex;
+  flex-direction: column;
 }
-
+.styled-input-label {
+  color: black;
+}
 .styled-input-form {
   border: solid gray 0.1rem;
   border-radius: 0.2rem;

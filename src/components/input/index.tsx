@@ -4,7 +4,7 @@ import React, { ChangeEvent } from 'react';
 interface InputProps {
   placeholder?: string;
   label?: string;
-  value?: string;
+  value: string;
   name?: string;
   onChange: (newValue: string) => void;
 }
@@ -23,6 +23,7 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <div className="styled-input">
+      <label className="styled-input-label">{label}</label>
       <input
         className="styled-input-form"
         placeholder={placeholder}
