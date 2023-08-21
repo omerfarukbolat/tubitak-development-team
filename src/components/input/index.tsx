@@ -6,6 +6,8 @@ interface InputProps {
   label?: string;
   value: string;
   name?: string;
+  maxWidth?: boolean;
+  width?: number;
   onChange: (newValue: string) => void;
 }
 
@@ -14,6 +16,8 @@ const Input: React.FC<InputProps> = ({
   label,
   value,
   name,
+  maxWidth = false,
+  width,
   onChange,
 }) => {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +29,7 @@ const Input: React.FC<InputProps> = ({
     <div className="styled-input">
       <label className="styled-input-label">{label}</label>
       <input
-        className="styled-input-form"
+        className={`styled-input-form ${maxWidth ? 'maxWidth' : ''}`}
         placeholder={placeholder}
         value={value}
         name={name}
