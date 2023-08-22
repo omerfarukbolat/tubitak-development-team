@@ -1,0 +1,30 @@
+.styled-input {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 12px;
+  width: 190px;
+}
+
+.styled-input.maxWidth {
+  width: 100%;
+}
+
+.styled-input-label {
+  padding: inherit;
+  font-size: 14px;
+  color: #000000;
+}
+
+.styled-input-form {
+  border: solid black 0.1rem;
+  border-radius: 0.2rem;
+  font-size: 16px;
+  color: #141414;
+  height: 30px;
+  padding-left: 10px;
+  width: 100%;
+}
+
+.styled-input-form::placeholder {
+  color: #c2c2c2;
+}
