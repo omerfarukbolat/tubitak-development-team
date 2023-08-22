@@ -1,0 +1,17 @@
+.styled-span {
+  display: inline-flex;
+  justify-content: center;
+  padding: 12px;
+  width: 190px;
+  background-color: white;
+  border: solid rgb(174, 214, 173) 1px;
+  border-radius: 5px;
+  margin: 10px;
+  height: 20px;
+}
+
+.styled-span-form {
+  color: black;
+  opacity: 0.9;
+  font-size: 14px;
+}
