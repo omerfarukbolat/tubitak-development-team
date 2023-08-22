@@ -1,11 +1,16 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(-20deg, #fdf542, #fbd808, #ff9005, #f9530b, #ff0000);
+  background: linear-gradient(
+    -20deg,
+    #fdf542,
+    #fbd808,
+    #ff9005,
+    #f9530b,
+    #ff0000
+  );
   height: 100vh;
   width: 100vw;
 }
@@ -21,6 +26,7 @@ ul {
   margin: 0;
 }
 
-button, input {
+button,
+input {
   outline: none;
 }

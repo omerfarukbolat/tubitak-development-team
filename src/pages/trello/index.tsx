@@ -1,5 +1,9 @@
 const Trello = () => {
-  return <div>Trello</div>;
+  return (
+    <div>
+      <h1>Trello App</h1>
+    </div>
+  );
 };
 
 export default Trello;
