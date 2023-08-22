@@ -1,0 +1,22 @@
+.styled-nav {
+    width: 80%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 8px 12px;
+  }
+  
+  .tab-button {
+    text-decoration: none;
+    color: #333333;
+    background: none;
+    border: none;
+  }
+  .tab-button.active {
+    color: blue;
+    border-bottom: 2px solid blue;
+
+  }

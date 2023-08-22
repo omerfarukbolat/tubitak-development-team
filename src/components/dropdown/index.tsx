@@ -11,23 +11,24 @@ interface Option{
 
 const Dropdown = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [selectedOption, setSelectionOption] = useState<Option | null>(null);
 
     const options: Option[]=[
         {label:"Seçenek 1",
         func: () => {
-            alert("Seçenek 1 seçildi!");
+            console.log("Seçenek 1 seçildi!");
         },
         value:"option1"},
         
         {label:"Seçenek 2",
         func: () => {
-            alert("Seçenek 2 seçildi!");
+            console.log("Seçenek 2 seçildi!");
         },
         value:"option2"},
         
         {label:"Seçenek 3",
         func: () => {
-            alert("Seçenek 3 seçildi!");
+            console.log(selectedOption);
         },
         value:"option3"}
     ]
@@ -36,6 +37,11 @@ const Dropdown = () => {
         setIsOpen(!isOpen);
     };
 
+    const hannleOptionClick = (option: Option)=> {
+        setSelectionOption(option);
+        option.func();
+    };
+    
     return (
         <div className="dropdown">
             <button className="dropbtn" onClick={toggleDropdown}>
@@ -46,8 +52,12 @@ const Dropdown = () => {
             {isOpen && (
                 <div className="dropdown-content">
                    {options.map(option => (
-                        <a key={option.value} onClick={option.func}>
-                            {option.label}
+                        <a 
+                            key={option.value} 
+                            onClick= {()=> hannleOptionClick(option)}
+                            className={selectedOption && selectedOption.value === option.value ? "selected" : ""}
+                            >
+                                {option.label}
                         </a>
                     ))}
                 </div>
