@@ -1,8 +1,9 @@
-import Span from '../../components/span';
-import React from 'react';
-
-const Trello: React.FC = () => {
-  return <Span label="Buy Medicines" />;
+const Trello = () => {
+  return (
+    <div>
+      <h1>Trello App</h1>
+    </div>
+  );
 };
 
 export default Trello;
