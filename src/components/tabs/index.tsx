@@ -1,54 +1,34 @@
 import './index.css';
 import React, { useState } from 'react';
 
-interface Data{
+interface TabData {
   label: string;
   func: () => void;
 }
 
-const data: Data[]=[
-  {
-    label:"All",
-    func:()=>{
-      console.log('All Butona Tıklandı')
-    }
-  },{
-    label:"Active",
-    func:()=>{
-      console.log('Active Butona Tıklandı')
-    }
-  },{
-    label:"Completed",
-    func:()=>{
-      console.log('Comleted Butona Tıklandı')
-    }
-  }
+interface TabsProps {
+  data: TabData[];
+  active: string;
+  setActive: (tab: string) => void;
+}
 
-]
-
-function Navbar() {
-  const [activeTab, setActiveTab] = useState('all'); 
-
-  const handleTabClick = (tab : string) => {
-    setActiveTab(tab);
-  };
-
+function Navbar({ data, active, setActive }: TabsProps) {
   return (
     <nav className="styled-nav">
-    {data.map(item => (
-      <button
-        key={item.label}
-        className={`tab-button ${activeTab === item.label.toLowerCase() ? 'active' : ''}`}
-        onClick={() => {
-          handleTabClick(item.label.toLowerCase());
-          item.func(); // İlgili işlevi burada çağırıyoruz
-        }}
-        data-tab={item.label.toLowerCase()}
-      >
-        {item.label}
-      </button>
-    ))}
-  </nav>
+      {data.map(item => (
+        <button
+          key={item.label}
+          className={`tab-button ${active === item.label.toLowerCase() ? 'active' : ''}`}
+          onClick={() => {
+            setActive(item.label.toLowerCase());
+            item.func();
+          }}
+          data-tab={item.label.toLowerCase()}
+        >
+          {item.label}
+        </button>
+      ))}
+    </nav>
   );
 }
 
