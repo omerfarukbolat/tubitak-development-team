@@ -17,7 +17,6 @@ const Input: React.FC<InputProps> = ({
   value,
   name,
   maxWidth = false,
-  width,
   onChange,
 }) => {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
