@@ -7,7 +7,6 @@ interface InputProps {
   value: string;
   name?: string;
   maxWidth?: boolean;
-  width?: number;
   onChange: (newValue: string) => void;
 }
 
