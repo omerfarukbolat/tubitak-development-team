@@ -1,5 +1,3 @@
-import Tabs from "../../components/tabs";
-
 const Todo = () => {
   return (
     <div>
