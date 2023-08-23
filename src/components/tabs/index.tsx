@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 
 interface TabData {
   label: string;
-  func: () => void;
 }
 
 interface TabsProps {
@@ -21,7 +20,6 @@ function Tabs({ data, active, setActive }: TabsProps) {
           className={`styled-tabs-button ${active === item.label.toLowerCase() ? 'active' : ''}`}
           onClick={() => {
             setActive(item.label.toLowerCase());
-            item.func();
           }}
           data-tab={item.label.toLowerCase()}
         >
