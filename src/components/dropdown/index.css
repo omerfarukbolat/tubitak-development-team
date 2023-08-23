@@ -1,4 +1,4 @@
-.styled-dropdown{
+.styled-dropdown-dot{
     height: 5px;
     width: 5px;
     background-color: #bbb;
@@ -6,7 +6,7 @@
     display: inline-block;
 }
 
-.dropbtn {
+.styled-dropdown-button {
     background-color:transparent;
     color: white;
     padding: 16px;
@@ -17,12 +17,12 @@
     gap: 2px; 
   }
   
-  .dropdown {
+  .styled-dropdown {
     position: relative;
     display: inline-block;
   }
   
-  .dropdown-content {
+  .styled-dropdown-content {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
@@ -32,16 +32,16 @@
     left: 0;
   }
   
-  .dropdown-content a {
+  .styled-dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
   }
   
-  .dropdown-content a:hover {background-color: #f1f1f1}
+  .styled-dropdown-content a:hover {background-color: #f1f1f1}
   
-  .dropdown:hover .dropdown-content {
+  .styled-dropdown-dot:hover .styled-dropdown-content {
     display: block;
   }
   

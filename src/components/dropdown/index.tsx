@@ -1,53 +1,38 @@
 import React, { useState } from "react";
 import "./index.css";
 
-interface Option{
-    label: string;
-    value: string;
-    func: () => void;
+interface DropdownData {
+    name: string;
+    click: () => void;
 
+}
+interface DropdownProps {
+    data: DropdownData[];
+    isReverse:boolean;
+    
 }
 
 
-const Dropdown = () => {
+const Dropdown: React.FC<DropdownProps> = ({data}) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const options: Option[]=[
-        {label:"Seçenek 1",
-        func: () => {
-            alert("Seçenek 1 seçildi!");
-        },
-        value:"option1"},
-        
-        {label:"Seçenek 2",
-        func: () => {
-            alert("Seçenek 2 seçildi!");
-        },
-        value:"option2"},
-        
-        {label:"Seçenek 3",
-        func: () => {
-            alert("Seçenek 3 seçildi!");
-        },
-        value:"option3"}
-    ]
-    
+
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
 
     return (
-        <div className="dropdown">
-            <button className="dropbtn" onClick={toggleDropdown}>
-                <span className="styled-dropdown"></span>
-                <span className="styled-dropdown"></span>
-                <span className="styled-dropdown"></span>
+        <div className="styled-dropdown">
+            <button className="styled-dropdown-button" onClick={toggleDropdown}>
+                <span className="styled-dropdown-dot"></span>
+                <span className="styled-dropdown-dot"></span>
+                <span className="styled-dropdown-dot"></span>
             </button>
             {isOpen && (
-                <div className="dropdown-content">
-                   {options.map(option => (
-                        <a key={option.value} onClick={option.func}>
-                            {option.label}
+                <div className="styled-dropdown-content">
+                    {data.map(data => (
+                        <a key={data.name} onClick={data.click}>
+                            {data.name}
                         </a>
                     ))}
                 </div>
