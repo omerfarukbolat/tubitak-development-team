@@ -1,0 +1,12 @@
+.styled-checkbox-label {
+    padding-left: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    max-width: 300px;
+  }
+  
+
+  .styled-checkbox-label.checked {
+    text-decoration: line-through;
+  }
+  
