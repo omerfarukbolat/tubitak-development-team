@@ -12,13 +12,13 @@ interface TabsProps {
   setActive: (tab: string) => void;
 }
 
-function Navbar({ data, active, setActive }: TabsProps) {
+function Tabs({ data, active, setActive }: TabsProps) {
   return (
-    <nav className="styled-nav">
+    <nav className="styled-tabs">
       {data.map(item => (
         <button
           key={item.label}
-          className={`tab-button ${active === item.label.toLowerCase() ? 'active' : ''}`}
+          className={`styled-tabs-button ${active === item.label.toLowerCase() ? 'active' : ''}`}
           onClick={() => {
             setActive(item.label.toLowerCase());
             item.func();
@@ -32,4 +32,4 @@ function Navbar({ data, active, setActive }: TabsProps) {
   );
 }
 
-export default Navbar;
+export default Tabs;

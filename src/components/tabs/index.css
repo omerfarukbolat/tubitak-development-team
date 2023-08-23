@@ -1,4 +1,4 @@
-.styled-nav {
+.styled-tabs {
     width: 200px;
     margin: 0 auto;
     display: grid;
@@ -6,13 +6,13 @@
     padding: 8px 12px;
   }
   
-  .tab-button {
+  .styled-tabs-button {
     text-decoration: none;
     color: #333333;
     background: none;
     border: none;
   }
-  .tab-button.active {
+  .styled-tabs-button.active {
     color: blue;
     border-bottom: 2px solid blue;
 
