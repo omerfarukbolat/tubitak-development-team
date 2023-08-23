@@ -1,0 +1,22 @@
+.styled-card-detail {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: #ffffff;
+  border: solid rgb(174, 214, 173) 1px;
+  border-radius: 5px;
+  margin: 10px;
+  height: 20px;
+  width: 190px;
+}
+
+.styled-card-detail.maxWidth {
+  width: 100%;
+}
+
+.styled-card-detail-form {
+  color: black;
+  font-size: 14px;
+  opacity: 0.9;
+}
