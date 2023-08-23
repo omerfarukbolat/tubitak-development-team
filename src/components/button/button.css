@@ -1,0 +1,33 @@
+.styled-button {
+  outline: none;
+  padding: 15px;
+  border-radius: 5px;
+  font-weight: 600;
+  border: none;
+  cursor:pointer;
+}
+
+.styled-button.colour-white {
+  color: white;
+}
+
+.styled-button.colour-black {
+  color: black;
+}
+
+.styled-button.backgroundColour-blue {
+  background-color: #527cf8;
+}
+
+.styled-button.backgroundColour-red {
+  background-color: red;
+}
+
+.styled-button.backgroundColour-green {
+  background-color: green;
+}
+
+.styled-button.backgroundColour-yellow {
+  background-color: yellow;
+}
+  
