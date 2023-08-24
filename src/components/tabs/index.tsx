@@ -1,5 +1,4 @@
 import './index.css';
-import React, { useState } from 'react';
 
 interface TabData {
   label: string;
@@ -11,13 +10,15 @@ interface TabsProps {
   setActive: (tab: string) => void;
 }
 
-function Tabs({ data, active, setActive }: TabsProps) {
+const Tabs: React.FC<TabsProps> = ({ data, active, setActive }) => {
   return (
     <nav className="styled-tabs">
-      {data.map(item => (
+      {data.map((item) => (
         <button
           key={item.label}
-          className={`styled-tabs-button ${active === item.label.toLowerCase() ? 'active' : ''}`}
+          className={`styled-tabs-button ${
+            active === item.label.toLowerCase() ? 'active' : ''
+          }`}
           onClick={() => {
             setActive(item.label.toLowerCase());
           }}
@@ -28,6 +29,6 @@ function Tabs({ data, active, setActive }: TabsProps) {
       ))}
     </nav>
   );
-}
+};
 
 export default Tabs;

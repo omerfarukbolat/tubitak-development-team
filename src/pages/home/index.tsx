@@ -1,8 +1,11 @@
+import Container from '../../components/container';
+import './home.css';
+
 const Home = () => {
   return (
-    <div>
+    <Container>
       <h1>Home App</h1>
-    </div>
+    </Container>
   );
 };
 
