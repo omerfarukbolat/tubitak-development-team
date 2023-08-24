@@ -1,6 +1,6 @@
 .styled-card-detail {
   display: inline-flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 12px;
   background-color: #ffffff;
@@ -9,14 +9,37 @@
   margin: 10px;
   height: 20px;
   width: 190px;
-}
-
-.styled-card-detail.maxWidth {
-  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transition: all 300ms;
 }
 
 .styled-card-detail-form {
   color: black;
   font-size: 14px;
   opacity: 0.9;
+}
+
+.styled-card-detail-dropdown {
+  display: none;
+}
+
+.styled-card-detail:hover {
+  justify-content: space-between;
+}
+
+.styled-card-detail:hover .styled-card-detail-dropdown {
+  display: block;
+  animation: fadeUp 400ms;
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

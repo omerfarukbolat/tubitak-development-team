@@ -3,41 +3,22 @@ import './card-details.css';
 import Dropdown from '../dropdown/index';
 
 interface CardDetailsProps {
-  name?: string;
   label?: string;
-  maxWidth?: boolean;
+  data: DataProps[];
 }
 
-const CardDetails: React.FC<CardDetailsProps> = ({ label }) => {
-  const handleDelete = () => {
-    console.log('Delete event');
-  };
-  const handleEdit = () => {
-    console.log('Edit event');
-  };
-  const handleNext = () => {
-    console.log('Next event');
-  };
+interface DataProps {
+  name: string;
+  click: () => void;
+}
 
+const CardDetails: React.FC<CardDetailsProps> = ({ label, data }) => {
   return (
     <div className="styled-card-detail">
       <span className="styled-card-detail-form">{label}</span>
-      <Dropdown
-        data={[
-          {
-            name: 'Next',
-            click: handleNext,
-          },
-          {
-            name: 'Edit',
-            click: handleEdit,
-          },
-          {
-            name: 'Delete',
-            click: handleDelete,
-          },
-        ]}
-      />
+      <div className="styled-card-detail-dropdown">
+        <Dropdown data={data} />
+      </div>
     </div>
   );
 };
