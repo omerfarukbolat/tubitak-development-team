@@ -1,0 +1,29 @@
+.styled-checkbox-list {
+    display: flex;
+    flex-direction: column; 
+    max-width: 400px; 
+
+
+  }
+  
+  .styled-checkbox-list-checkboxLabel {
+    display: flex;
+    height: 60px;
+    align-items: center;
+    border-bottom: 1px solid #9f9090; /* Her öğe arasına çizgi ekle */
+
+
+  }
+  
+  .styled-checkbox-list-dropdown {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    margin-left: auto;
+  }
+  
+  .styled-checkbox-list-checkboxLabel:last-child {
+    border-bottom: none; /* Son öğenin altına çizgi eklemeyi engelle */
+  }
+  
+  
