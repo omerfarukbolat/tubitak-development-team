@@ -16,7 +16,7 @@
   color: black;
   font-size: 14px;
   opacity: 0.9;
-  animation: 4s rise;
+  animation: 1s rise;
 }
 
 .styled-card-detail-dropdown {
@@ -27,7 +27,7 @@
   justify-content: space-between;
 }
 .styled-card-detail:hover .styled-card-detail-form {
-  animation: 3s slidein ease-in-out;
+  animation: 1s slidein ease-in-out;
 }
 
 @keyframes slidein {
