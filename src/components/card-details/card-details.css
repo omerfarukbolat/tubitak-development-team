@@ -1,67 +1,28 @@
 .styled-card-detail {
   display: inline-flex;
-  justify-content: center;
   align-items: center;
-  padding: 12px;
+  padding: 10px;
   background-color: #ffffff;
   border: solid rgb(174, 214, 173) 1px;
   border-radius: 5px;
   margin: 10px;
-  height: 30px;
-  width: 190px;
+  min-height: 45px;
+  width: 200px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  padding-right: 45px;
+  flex-wrap: wrap;
 }
 
 .styled-card-detail-form {
   color: black;
   font-size: 14px;
   opacity: 0.9;
-  animation: 1s rise;
+  word-break: break-all;
 }
 
 .styled-card-detail-dropdown {
-  display: none;
-}
-
-.styled-card-detail:hover {
-  justify-content: space-between;
-}
-.styled-card-detail:hover .styled-card-detail-form {
-  animation: 1s slidein ease-in-out;
-}
-
-@keyframes slidein {
-  from {
-    margin-left: 15%;
-  }
-
-  to {
-    margin-left: 0%;
-  }
-}
-
-@keyframes rise {
-  from {
-    transform: translateX(-5vh);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-.styled-card-detail:hover .styled-card-detail-dropdown {
-  display: block;
-  animation: fadeUp 400ms;
-}
-
-@keyframes fadeUp {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  position: absolute;
+  right: 5px;
+  top: 0;
 }

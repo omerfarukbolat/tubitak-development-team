@@ -15,7 +15,7 @@ interface DataProps {
 const CardDetails: React.FC<CardDetailsProps> = ({ label, data }) => {
   return (
     <div className="styled-card-detail">
-      <span className="styled-card-detail-form">{label}</span>
+      <div className="styled-card-detail-form">{label}</div>
       <div className="styled-card-detail-dropdown">
         <Dropdown data={data} />
       </div>
