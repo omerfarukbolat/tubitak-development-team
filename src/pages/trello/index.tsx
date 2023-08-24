@@ -1,8 +1,11 @@
+import Container from '../../components/container';
+import './trello.css';
+
 const Trello = () => {
   return (
-    <div>
+    <Container>
       <h1>Trello App</h1>
-    </div>
+    </Container>
   );
 };
 

@@ -1,8 +1,11 @@
+import Container from '../../components/container';
+import './notes.css';
+
 const Notes = () => {
   return (
-    <div>
+    <Container>
       <h1>Notes App</h1>
-    </div>
+    </Container>
   );
 };
 

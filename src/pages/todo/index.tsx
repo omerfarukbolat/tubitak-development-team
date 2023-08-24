@@ -1,8 +1,11 @@
+import Container from '../../components/container';
+import './todo.css';
+
 const Todo = () => {
   return (
-    <div>
+    <Container>
       <h1>Todo App</h1>
-    </div>
+    </Container>
   );
 };
 

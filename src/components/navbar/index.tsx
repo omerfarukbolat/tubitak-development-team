@@ -1,6 +1,7 @@
 import './navbar.css';
 import linkes from '../../json/navbar.json';
 import { useNavigate } from 'react-router-dom';
+import Container from '../container';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -11,17 +12,19 @@ const Navbar = () => {
 
   return (
     <div className="styled-navbar">
-      <ul className="styled-navbar-list">
-        {linkes.map((item) => (
-          <li
-            className="styled-navbar-list-item"
-            key={item.id}
-            onClick={() => handleRedirect(item.link)}
-          >
-            {item.name}
-          </li>
-        ))}
-      </ul>
+      <Container>
+        <ul className="styled-navbar-list">
+          {linkes.map((item) => (
+            <li
+              className="styled-navbar-list-item"
+              key={item.id}
+              onClick={() => handleRedirect(item.link)}
+            >
+              {item.name}
+            </li>
+          ))}
+        </ul>
+      </Container>
     </div>
   );
 };
