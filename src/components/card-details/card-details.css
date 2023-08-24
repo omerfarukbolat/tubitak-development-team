@@ -1,0 +1,28 @@
+.styled-card-detail {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #ffffff;
+  border: solid rgb(174, 214, 173) 1px;
+  border-radius: 5px;
+  margin: 10px;
+  min-height: 45px;
+  width: 200px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  padding-right: 45px;
+  flex-wrap: wrap;
+}
+
+.styled-card-detail-form {
+  color: black;
+  font-size: 14px;
+  opacity: 0.9;
+  word-break: break-all;
+}
+
+.styled-card-detail-dropdown {
+  position: absolute;
+  right: 5px;
+  top: 0;
+}
