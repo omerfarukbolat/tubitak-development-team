@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './addnote.css';
 import Input from '../input';
 import TextArea from '../textArea';
-
+import Button from '../button';
 export interface NoteItemProps {
   id: string;
   title: string;
@@ -48,8 +48,8 @@ const AddNote: React.FC<AddNoteButtonProps> = ({ onAddNote }) => {
           />
 
           <div className="styled-addNote-buttons">
-            <button onClick={handleAddNote}>Add Note</button>
-            <button onClick={() => setShowForm(false)}>Cancel</button>
+            <Button onClick={handleAddNote} label='Add Note'/>
+            <Button onClick={() => setShowForm(false)} label='Cancel'/>
           </div>
         </div>
       ) : (
