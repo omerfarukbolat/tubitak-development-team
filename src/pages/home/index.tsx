@@ -1,11 +1,10 @@
-import Container from '../../components/container';
-import './home.css';
+import React from 'react';
 
 const Home = () => {
   return (
-    <Container>
-      <h1>Home App</h1>
-    </Container>
+    <div>
+      <h1>Home Page</h1>
+    </div>
   );
 };
 
