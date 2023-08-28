@@ -10,6 +10,10 @@
 }
 
 .styled-card-detail-list-button {
+  display: none;
+}
+
+.styled-card-detail-list:hover .styled-card-detail-list-button {
   display: flex;
   justify-content: flex-end;
   align-items: center;
