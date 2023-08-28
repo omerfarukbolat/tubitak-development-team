@@ -7,16 +7,18 @@
   border: 1px;
   border-radius: 5px;
   padding: 10px;
+  position: relative;
 }
 
 .styled-card-detail-list-button {
+  position: absolute;
   display: none;
 }
 
 .styled-card-detail-list:hover .styled-card-detail-list-button {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  display: block;
+  left: 200px;
+  top: 10px;
 }
 
 .styled-card-detail-list-label {
@@ -26,7 +28,7 @@
   font-weight: 700;
   color: green;
   font-size: 1.5rem;
-  margin-top: 3px;
+  margin-top: 60px;
 }
 
 .styled-card-detail-list-input {

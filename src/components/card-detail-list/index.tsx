@@ -42,6 +42,7 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
     if (e.key === 'Enter') {
       handleSubmit();
       setIsShow(false);
+      setValueInput('');
     }
   };
 
