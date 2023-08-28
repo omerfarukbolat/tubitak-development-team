@@ -1,0 +1,40 @@
+.styled-card-detail-list {
+  display: inline-flex;
+  flex-direction: column;
+  width: 290px;
+  min-height: 100px;
+  background-color: whitesmoke;
+  border: 1px;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 30px; /*deneme yapmak için*/
+}
+
+.styled-card-detail-list-button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.styled-card-detail-list-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  color: green;
+  font-size: 1.5rem;
+  margin-top: 3px;
+}
+
+.styled-card-detail-list-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.styled-card-detail-list-cardDetails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
