@@ -1,5 +1,5 @@
 import './input.css';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, KeyboardEvent } from 'react';
 
 interface InputProps {
   placeholder?: string;
@@ -8,6 +8,7 @@ interface InputProps {
   name?: string;
   maxWidth?: boolean;
   onChange: (newValue: string) => void;
+  onKeyUp?: (event: KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -17,6 +18,7 @@ const Input: React.FC<InputProps> = ({
   name,
   maxWidth = false,
   onChange,
+  onKeyUp,
 }) => {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
@@ -32,6 +34,7 @@ const Input: React.FC<InputProps> = ({
         value={value}
         name={name}
         onChange={handleInputChange}
+        onKeyUp={onKeyUp}
       />
     </div>
   );
