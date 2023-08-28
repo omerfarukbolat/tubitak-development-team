@@ -60,11 +60,6 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
           />
         </div>
       )}
-      {isAddCardDetails && (
-        <div className="styled-card-detail-list-cardDetails">
-          <CardDetails label={data[0].name} dropdown={[]} />
-        </div>
-      )}
       {data.length > 0 && (
         <div className="styled-card-detail-list-cardDetails">
           {data.map((item) => (
