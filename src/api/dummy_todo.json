@@ -1,0 +1,15 @@
+{
+    "tabData": [
+      { "label": "Add"},
+      { "label": "Pending" },
+      { "label": "Completed" }
+    ],
+    "checkboxListData": [
+      { "label": "Renew gym membership", "active": false },
+      { "label": "Create a video for YouTube", "active": true },
+      { "label": "Write a blog about new trends", "active": false },
+      { "label": "Send project file to the client", "active": false },
+      { "label": "Discuss new project with team", "active": false }
+    ]
+    
+  }
