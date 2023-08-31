@@ -1,8 +1,8 @@
 .styled-input {
   display: inline-flex;
   flex-direction: column;
-  width: 190px;
   padding: 12px;
+  width: 190px;
 }
 
 .styled-input.maxWidth {
