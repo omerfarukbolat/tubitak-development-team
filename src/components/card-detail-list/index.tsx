@@ -5,7 +5,7 @@ import Input from '../input';
 import './card-detail-list.css';
 
 interface CardDetailsListProps {
-  label?: string | any;
+  label?: string;
   dropdown: DropdownProps[];
   data: DataProps[];
   setData: (data: DataProps[]) => void;
@@ -50,6 +50,8 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSubmit();
+      setIsShow(false);
+      setValueInput('');
     }
   };
 
