@@ -9,6 +9,8 @@ interface CardDetailsListProps {
   dropdown: DropdownProps[];
   data: DataProps[];
   setData: (data: DataProps[]) => void;
+  addInput?: boolean;
+  addButton?: boolean;
 }
 
 interface DropdownProps {
@@ -27,6 +29,8 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
   dropdown,
   data,
   setData,
+  addInput = false,
+  addButton = false,
 }) => {
   const [valueInput, setValueInput] = useState<string>('');
   const [isShow, setIsShow] = useState(false);
@@ -51,11 +55,13 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
 
   return (
     <div className="styled-card-detail-list">
-      <div className="styled-card-detail-list-button">
-        <Button label="Add Card" onClick={showInput} />
-      </div>
+      {addButton && (
+        <div className="styled-card-detail-list-button">
+          <Button label="Add Card" onClick={showInput} />
+        </div>
+      )}
       <div className="styled-card-detail-list-label">{label}</div>
-      {isShow && (
+      {isShow && addInput && (
         <div className="styled-card-detail-list-input">
           <Input
             value={valueInput}

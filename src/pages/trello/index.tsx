@@ -41,51 +41,27 @@ const Trello = () => {
   return (
     <Container>
       <div className="styled-trello">
-        <div className="styled-trello-card-list">
-          {multipleData(data).map((item) => (
-            <CardDetailsList
-              label={
-                item.title === 'todo'
-                  ? 'To Do '
-                  : item.title === 'in_progress'
-                  ? ' In Progress'
-                  : 'Done'
-              }
-              dropdown={[
-                { name: 'In Progress', click() {} },
-                { name: 'Update', click() {} },
-                { name: 'Delete', click() {} },
-              ]}
-              data={item.data}
-              setData={setData}
-            />
-          ))}
-        </div>
-
-        {/* <div className="styled-trello-card-inProgress">
+        {multipleData(data).map((item) => (
           <CardDetailsList
-            label="In Progress"
+            addButton={item.title === 'todo' ? true : false}
+            addInput={item.title === 'todo' && 'in_progress' ? true : false}
+            key={item.id}
+            label={
+              item.title === 'todo'
+                ? 'To Do '
+                : item.title === 'in_progress'
+                ? ' In Progress'
+                : 'Done'
+            }
             dropdown={[
-              { name: 'Done', click() {} },
+              { name: 'In Progress', click() {} },
               { name: 'Update', click() {} },
               { name: 'Delete', click() {} },
             ]}
-            data={data}
+            data={item.data}
             setData={setData}
           />
-        </div>
-
-        <div className="styled-trello-card-done">
-          <CardDetailsList
-            label="Done"
-            dropdown={[
-              { name: 'Update', click() {} },
-              { name: 'Delete', click() {} },
-            ]}
-            data={data}
-            setData={setData}
-          />
-        </div> */}
+        ))}
       </div>
     </Container>
   );
