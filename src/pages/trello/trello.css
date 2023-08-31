@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-between;
 }
-.styled-trello-card-done.label {
-  color: yellowgreen;
-  background-color: aquamarine;
+.styled-trello-card-list {
+  justify-content: space-between;
 }

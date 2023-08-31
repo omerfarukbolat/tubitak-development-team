@@ -5,30 +5,64 @@ import './trello.css';
 import dummyDatas from '../../json/dummyTrello.json';
 
 const Trello = () => {
-  const [dataToDo, setDataToDo] = useState<DataProps[]>([]);
-  const [dataInProgress, setDataInProgress] = useState<DataProps[]>([]);
-  const [dataDone, setDataDone] = useState<DataProps[]>([]);
+  const [data, setData] = useState<DataProps[]>([]);
 
-  const mappedDummyData = dummyDatas.map((item) => {
-    return { ...item, id: item.id, name: item.name, status: item.status };
-  });
+  useEffect(() => {
+    setData(dummyDatas);
+  }, []);
+
+  const onlyStatusAddInArr = (data: DataProps[]) => {
+    const setStatus = new Set();
+
+    for (const item of data) {
+      setStatus.add(item.status);
+    }
+    return Array.from(setStatus);
+  };
+
+  const multipleData = (data: DataProps[]) => {
+    const multiData = [];
+
+    const statusArr = onlyStatusAddInArr(data);
+
+    for (let i = 0; i < statusArr.length; i++) {
+      const element = statusArr[i];
+      multiData.push({
+        id: i,
+        title: element,
+        data: data.filter(
+          (item: { status: string }) => item.status === element
+        ),
+      });
+    }
+    return multiData;
+  };
 
   return (
     <Container>
       <div className="styled-trello">
-        <div className="styled-trello-card-todo">
-          <CardDetailsList
-            label="To Do"
-            dropdown={[
-              { name: 'In Progress', click() {} },
-              { name: 'Update', click() {} },
-              { name: 'Delete', click() {} },
-            ]}
-            data={dataToDo}
-            setData={setDataToDo}
-          />
+        <div className="styled-trello-card-list">
+          {multipleData(data).map((item) => (
+            <CardDetailsList
+              label={
+                item.title === 'todo'
+                  ? 'To Do '
+                  : item.title === 'in_progress'
+                  ? ' In Progress'
+                  : 'Done'
+              }
+              dropdown={[
+                { name: 'In Progress', click() {} },
+                { name: 'Update', click() {} },
+                { name: 'Delete', click() {} },
+              ]}
+              data={item.data}
+              setData={setData}
+            />
+          ))}
         </div>
-        <div className="styled-trello-card-inProgress">
+
+        {/* <div className="styled-trello-card-inProgress">
           <CardDetailsList
             label="In Progress"
             dropdown={[
@@ -36,10 +70,11 @@ const Trello = () => {
               { name: 'Update', click() {} },
               { name: 'Delete', click() {} },
             ]}
-            data={dataInProgress}
-            setData={setDataInProgress}
+            data={data}
+            setData={setData}
           />
         </div>
+
         <div className="styled-trello-card-done">
           <CardDetailsList
             label="Done"
@@ -47,10 +82,10 @@ const Trello = () => {
               { name: 'Update', click() {} },
               { name: 'Delete', click() {} },
             ]}
-            data={dataDone}
-            setData={setDataDone}
+            data={data}
+            setData={setData}
           />
-        </div>
+        </div> */}
       </div>
     </Container>
   );
