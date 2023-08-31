@@ -29,6 +29,7 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
 }) => {
   const [valueInput, setValueInput] = useState<string>('');
   const [isShow, setIsShow] = useState(false);
+  const [isAddCardDetails, setIsAddCardDetails] = useState(false);
 
   const showInput = () => {
     setIsShow(true);
@@ -41,8 +42,6 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSubmit();
-      setIsShow(false);
-      setValueInput('');
     }
   };
 
@@ -61,10 +60,15 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
           />
         </div>
       )}
+      {isAddCardDetails && (
+        <div className="styled-card-detail-list-cardDetails">
+          <CardDetails label={data[0].name} dropdown={[]} />
+        </div>
+      )}
       {data.length > 0 && (
         <div className="styled-card-detail-list-cardDetails">
           {data.map((item) => (
-            <CardDetails key={item.id} label={item.name} dropdown={dropdown} />
+            <CardDetails key={item.id} label={item.name} dropdown={[]} />
           ))}
         </div>
       )}

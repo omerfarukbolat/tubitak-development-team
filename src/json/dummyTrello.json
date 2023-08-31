@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Buy medicines",
+    "status": "todo"
+  },
+  {
+    "id": 2,
+    "name": "Go to the dentist",
+    "status": "todo"
+  },
+  {
+    "id": 3,
+    "name": "Grandpa birtday",
+    "status": "in_progress"
+  },
+  {
+    "id": 4,
+    "name": "Buy the suitcase",
+    "status": "done"
+  }
+]

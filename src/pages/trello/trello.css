@@ -1,0 +1,8 @@
+.styled-trello {
+  display: flex;
+  justify-content: space-between;
+}
+.styled-trello-card-done.label {
+  color: yellowgreen;
+  background-color: aquamarine;
+}
