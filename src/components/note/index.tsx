@@ -6,13 +6,13 @@ import TextArea from '../textArea';
 
 interface NoteProps {
   data: {
-    id: string;
+    id: number;
     title: string;
     description: string;
     date: Date;
   };
-  onEditNote: (id: string, updatedData: Partial<NoteProps['data']>) => void;
-  onDeleteNote: (id: string) => void;
+  onEditNote: (id: number, updatedData: Partial<NoteProps['data']>) => void;
+  onDeleteNote: (id: number) => void;
 }
 
 const Note: React.FC<NoteProps> = ({ data, onEditNote, onDeleteNote }) => {
@@ -31,7 +31,7 @@ const Note: React.FC<NoteProps> = ({ data, onEditNote, onDeleteNote }) => {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
-  }).format(date);
+  }).format(new Date(date));
 
   const handleEditNoteClick = () => {
     if (isEditMode) {
