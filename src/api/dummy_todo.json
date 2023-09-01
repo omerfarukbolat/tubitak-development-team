@@ -1,14 +1,15 @@
 {
     "tabData": [
-      { "label": "Add"},
+      { "label": "All"},
       { "label": "Pending" },
       { "label": "Completed" }
     ],
     "apiData": [
-      { "label": "Renew gym membership", "isCompleted": false },
-      { "label": "Create a video for YouTube", "isCompleted": true },
-      { "label": "Write a blog about new trends", "isCompleted": false },
-      { "label": "Send project file to the client", "isCompleted": false },
-      { "label": "Discuss new project with team", "isCompleted": false }
+      { "id":1,"label": "Renew gym membership", "isCompleted": false },
+      { "id":2,"label": "Create a video for YouTube", "isCompleted": true },
+      { "id":3,"label": "Write a blog about new trends", "isCompleted": false },
+      { "id":4,"label": "Send project file to the client", "isCompleted": false },
+      { "id":5,"label": "Discuss new project with team", "isCompleted": false }
     ]
+
   }
