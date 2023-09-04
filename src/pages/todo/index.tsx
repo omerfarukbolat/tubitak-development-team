@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import Container from '../../components/container';
 import Input from '../../components/input';
 import './todo.css';
@@ -8,17 +8,16 @@ import CheckboxList from '../../components/ckeckbox-list';
 import data from '../../api/dummy_todo.json';
 
 const Todo = () => {
-  const [activeTab, setActiveTab] = useState('pending');
+  const [activeTab, setActiveTab] = useState('all');
   const [newTask, setNewTask] = useState('');
   const [apiData, setApiData] = useState(data.apiData || []);
   const [filteredData, setFilteredData] = useState(apiData);
-  
-  const tabData = data.tabData;
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedTask, setEditedTask] = useState('');
+  const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
+  const [dropdownData, setDropdownData] = useState([]);
 
-  const dropdownData = [
-    { name: 'Update', click: () => console.log('Update clicked') },
-    { name: 'Delete', click: () => console.log('Delete clicked') },
-  ];
+  const tabData = data.tabData;
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && newTask.trim() !== '') {
@@ -27,28 +26,101 @@ const Todo = () => {
         label: newTask,
         isCompleted: false,
       };
-
       setApiData([...apiData, newTaskItem]);
       setNewTask('');
       console.log(newTaskItem);
     }
   };
-
   useEffect(() => {
-    let filteredTasks: { id: number; label: string; isCompleted: boolean; }[] | undefined;
-  
-    if (activeTab === 'completed') {
-      filteredTasks = apiData.filter((task) => task.isCompleted === true);
-      console.log('Tamamlanan görevler:', filteredTasks); // Tamamlanan görevleri kontrol etmek için log eklendi
-    } else if (activeTab === 'pending') {
-      filteredTasks = apiData.filter((task) => task.isCompleted === false);
-      console.log('Bekleyen görevler:', filteredTasks); // Bekleyen görevleri kontrol etmek için log eklendi
-    } else if (activeTab === 'all') {
-      filteredTasks = apiData;
+    const updateFilteredData = () => {
+      let filteredTasks:
+        | { id: number; label: string; isCompleted: boolean }[]
+        | undefined;
+
+      if (activeTab === 'completed') {
+        filteredTasks = apiData.filter((task) => task.isCompleted === true);
+      } else if (activeTab === 'pending') {
+        filteredTasks = apiData.filter((task) => task.isCompleted === false);
+      } else if (activeTab === 'all') {
+        filteredTasks = apiData;
+      }
+
+      setFilteredData(filteredTasks || []);
+    };
+
+    updateFilteredData();
+  }, [activeTab, apiData, filteredData]);
+  const handleClearAll = () => {
+    const updatedApiData = apiData.map((task) => ({
+      ...task,
+      isCompleted: true,
+    }));
+
+    setApiData(updatedApiData);
+  };
+
+  const getDropdownData = (task: {
+    id: number;
+    label: string;
+    isCompleted: boolean;
+  }) => {
+    if (task.isCompleted) {
+      return [
+        {
+          name: 'Update',
+          click: () => handleEditTask(task.id),
+        },
+        {
+          name: 'Delete',
+          click: () => handleDeleteTask(task.id),
+        },
+        {
+          name: 'Not Completed',
+          click: () => handleToggleCompleted(task.id),
+        },
+      ];
+    } else {
+      return [
+        {
+          name: 'Update',
+          click: () => handleEditTask(task.id),
+        },
+        {
+          name: 'Completed',
+          click: () => handleToggleCompleted(task.id),
+        },
+      ];
     }
-  
-    setFilteredData(filteredTasks || []);
-  }, [activeTab, apiData]);
+  };
+
+  const handleDeleteTask = (taskId: number) => {
+    const updatedApiData = apiData.filter((task) => task.id !== taskId);
+    setApiData(updatedApiData);
+  };
+  const handleUpdateTask = (taskId: number) => {
+    const updatedApiData = apiData.map((task) =>
+      task.id === taskId ? { ...task, label: editedTask } : task
+    );
+    setApiData(updatedApiData);
+    setEditingTaskId(null);
+  };
+  const handleEditTask = (taskId: number) => {
+    setEditingTaskId(taskId);
+    setEditedTask(apiData.find((task) => task.id === taskId)?.label || '');
+  };
+
+  const cancelEdit = () => {
+    setEditingTaskId(null);
+    setEditedTask('');
+  };
+  const reversedData = filteredData.slice().reverse();
+
+  const handleToggleCompleted = (taskId: number) => {
+    const updatedApiData = apiData.map((task) =>
+      task.id === taskId ? { ...task, isCompleted: !task.isCompleted } : task
+    );
+    setApiData(updatedApiData);
+  };
 
   return (
     <Container>
@@ -60,6 +132,7 @@ const Todo = () => {
           onChange={(newValue) => setNewTask(newValue)}
           onKeyDown={handleInputKeyDown}
         />
+
         <div className="styled-todo-tabs">
           <Tabs data={tabData} active={activeTab} setActive={setActiveTab} />
 
@@ -67,10 +140,32 @@ const Todo = () => {
             label="Clear All"
             colour="white"
             backgroundColour="blue"
-            onClick={() => {}}
+            onClick={() => handleClearAll()}
           />
         </div>
-        <CheckboxList data={filteredData} dropdownData={dropdownData} />
+        {reversedData.map((task) =>
+          editingTaskId === task.id ? (
+            <div>
+              <Input
+                value={editedTask}
+                onChange={(newValue) => setEditedTask(newValue)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleUpdateTask(task.id);
+                  } else if (e.key === 'Escape') {
+                    cancelEdit();
+                  }
+                }}
+              />
+            </div>
+          ) : (
+            <CheckboxList
+              key={task.id}
+              data={[task]}
+              dropdownData={getDropdownData(task)}
+            />
+          )
+        )}
       </div>
     </Container>
   );

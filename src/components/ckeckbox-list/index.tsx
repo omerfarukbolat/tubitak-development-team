@@ -24,14 +24,14 @@ const CheckboxList: React.FC<CheckboxListProps> = ({ data, dropdownData }) => {
   );
 
   const handleCheckboxChange = (index: number) => {
-    const updatedCheckboxData = [...checkboxData];
+    const updatedCheckboxData = [...data];
     updatedCheckboxData[index].isCompleted = !updatedCheckboxData[index].isCompleted;
     setCheckboxData(updatedCheckboxData);
   };
 
   return (
     <div className="styled-checkbox-list">
-      {checkboxData.map((item, index) => (
+      {data.map((item, index) => (
         <div className="styled-checkbox-list-checkboxLabel" key={index}>
           <CheckboxLabel
             label={item.label}

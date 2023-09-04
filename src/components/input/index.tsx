@@ -1,5 +1,5 @@
 import './input.css';
-import React, { ChangeEvent, KeyboardEvent } from 'react';
+import React, { ChangeEvent, KeyboardEventHandler } from 'react';
 
 interface InputProps {
   placeholder?: string;
@@ -8,7 +8,7 @@ interface InputProps {
   name?: string;
   maxWidth?: boolean;
   onChange: (newValue: string) => void;
-  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void; 
+  onKeyDown?: KeyboardEventHandler<HTMLInputElement> | undefined;
 
 }
 
@@ -35,7 +35,8 @@ const Input: React.FC<InputProps> = ({
         value={value}
         name={name}
         onChange={handleInputChange}
-      />
+        onKeyDown={onKeyDown as (event: React.KeyboardEvent<HTMLInputElement>) => void}
+        />
     </div>
   );
 };
