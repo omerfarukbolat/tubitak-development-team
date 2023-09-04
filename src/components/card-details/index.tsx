@@ -5,6 +5,7 @@ import Dropdown from '../dropdown/index';
 interface CardDetailsProps {
   label?: string;
   dropdown: DropdownProps[];
+  color?: 'white' | 'gray';
 }
 
 interface DropdownProps {
@@ -12,9 +13,13 @@ interface DropdownProps {
   click: () => void;
 }
 
-const CardDetails: React.FC<CardDetailsProps> = ({ label, dropdown }) => {
+const CardDetails: React.FC<CardDetailsProps> = ({
+  label,
+  dropdown,
+  color = 'white',
+}) => {
   return (
-    <div className="styled-card-detail">
+    <div className={`styled-card-detail colour-${color}`}>
       <div className="styled-card-detail-form">{label}</div>
       <div className="styled-card-detail-dropdown">
         <Dropdown data={dropdown} />
