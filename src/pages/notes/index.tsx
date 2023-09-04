@@ -46,9 +46,10 @@ const Notes: React.FC = () => {
 
   return (
     <Container>
-      <AddNote onAddNote={handleAddNote} />
-
       <div className="styled-note-list">
+        <div>
+          <AddNote onAddNote={handleAddNote} />
+        </div>
         {notes.map((note) => (
           <Note
             key={note.id}
