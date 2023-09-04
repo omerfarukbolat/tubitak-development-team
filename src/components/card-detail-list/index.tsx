@@ -5,7 +5,7 @@ import Input from '../input';
 import './card-detail-list.css';
 
 interface CardDetailsListProps {
-  label?: string;
+  label?: string | null | undefined;
   dropdown: DropdownProps[];
   data: DataProps[];
   setData: (data: DataProps[]) => void;
@@ -43,7 +43,7 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
   const handleSubmit = () => {
     setData([
       ...data,
-      { name: valueInput, status: 'todo ', id: new Date().getTime() },
+      { id: new Date().getTime(), name: valueInput, status: 'todo ' },
     ]);
   };
 

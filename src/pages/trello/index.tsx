@@ -20,6 +20,21 @@ const Trello = () => {
     return Array.from(setStatus);
   };
 
+  const titleFormatted = (title: string | unknown): string => {
+    if (typeof title === 'string') {
+      if (title.includes('_')) {
+        return title
+          .split('_')
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+      } else {
+        return title.charAt(0).toUpperCase() + title.slice(1);
+      }
+    } else {
+      return '';
+    }
+  };
+
   const multipleData = (data: DataProps[]) => {
     const multiData = [];
 
@@ -29,13 +44,17 @@ const Trello = () => {
       const element = statusArr[i];
       multiData.push({
         id: i,
-        title: element,
+        title: titleFormatted(element),
         data: data.filter(
           (item: { status: string }) => item.status === element
         ),
       });
     }
     return multiData;
+  };
+
+  const handelClick = () => {
+    console.log('clicked');
   };
 
   return (
@@ -46,17 +65,14 @@ const Trello = () => {
             addButton={item.title === 'todo' ? true : false}
             addInput={item.title === 'todo' && 'in_progress' ? true : false}
             key={item.id}
-            label={
-              item.title === 'todo'
-                ? 'To Do '
-                : item.title === 'in_progress'
-                ? ' In Progress'
-                : 'Done'
-            }
+            label={item.title}
             dropdown={[
-              { name: 'In Progress', click() {} },
-              { name: 'Update', click() {} },
-              { name: 'Delete', click() {} },
+              {
+                name: 'In Progress',
+                click: () => {
+                  handelClick();
+                },
+              },
             ]}
             data={item.data}
             setData={setData}
