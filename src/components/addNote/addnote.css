@@ -1,9 +1,11 @@
 .styled-addNote-container{
-    background-color: white;
+    /* background-color: white; */
     border-radius: 10px;
     width: 10%;
     padding-right: 4%;
     margin-left: 20px;
+    padding-top: 10px;
+
 }
 
 .styled-addNote{
@@ -26,13 +28,12 @@
     border-radius: 10px;
     cursor: pointer;
     width: 300px;
-    height: 300px;
+    height: 380px;
     outline: none;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 600;
-    
 }
 
 .styled-addNotes{
@@ -63,7 +64,8 @@
     color: white;
     font-weight: 700;
     margin: auto;
-    margin-top: 60%;
+    align-items: center;
+    margin-top: 90%;
     margin-left: 1%;
 }
 
