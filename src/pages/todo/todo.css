@@ -3,16 +3,15 @@
     width: 350px;
     background-color: #f5f5f5;
     padding: 20px;
+    margin: 0 auto;    
     border-radius: 8px;
-    margin: 0 auto;
-  }
 
-  /* .styled-todo::after {
-    
-} */
+  }
   
 .styled-todo-tabs{
     display: flex;
+    padding-bottom: 10px;
+      cursor:pointer;
 }
 
 .styled-tabs {
@@ -26,8 +25,21 @@
   }
 
   .styled-input{
-    width: 310px;
-    margin-right: auto;
-    margin-top: auto
+    width: 320px;
+
   }
+  
+  .styled-todo-tabs-end {
+    border-bottom: 1px solid #9f9090;
+    width: 390px;
+    margin-left: -20px;
+  }
+
+  .styled-todo-list-end {
+    border-bottom: 1px solid #9f9090;
+    width: 390px;
+    margin-left: -20px;
+    padding-top:20px;
+  }
+
   

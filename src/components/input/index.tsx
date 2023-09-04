@@ -28,7 +28,6 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <div className={`styled-input ${maxWidth ? 'maxWidth' : ''}`}>
-      <label className="styled-input-label">{label}</label>
       <input
         className="styled-input-form"
         placeholder={placeholder}
