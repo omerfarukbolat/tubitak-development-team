@@ -4,9 +4,8 @@
   padding: 10px;
   border: solid rgb(220, 233, 215) 1px;
   border-radius: 5px;
-  margin: 10px;
   min-height: 30px;
-  width: 200px;
+  width: 100%;
   position: relative;
   padding-right: 45px;
   flex-wrap: wrap;
