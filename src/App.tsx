@@ -4,10 +4,12 @@ import Notes from './pages/notes';
 import Todo from './pages/todo';
 import Trello from './pages/trello';
 import Navbar from './components/navbar';
+import Modal from './modal';
 
 const App = () => {
   return (
     <Router>
+      <Modal />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

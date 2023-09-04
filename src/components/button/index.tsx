@@ -12,15 +12,13 @@ const Button = ({
   colour = 'white',
   backgroundColour = 'blue',
   onClick,
-}: ButtonProps) => {
-  return (
-    <button
-      className={`styled-button colour-${colour} backgroundColour-${backgroundColour}`}
-      onClick={onClick}
-    >
-      {label}
-    </button>
-  );
-};
+}: ButtonProps) => (
+  <button
+    className={`styled-button colour-${colour} backgroundColour-${backgroundColour}`}
+    onClick={onClick}
+  >
+    {label}
+  </button>
+);
 
 export default Button;
