@@ -46,7 +46,6 @@ const Notes: React.FC = () => {
 
   return (
     <Container>
-      <h1>Notes App</h1>
       <AddNote onAddNote={handleAddNote} />
 
       <div className="styled-note-list">
