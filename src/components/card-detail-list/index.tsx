@@ -13,7 +13,7 @@ interface CardDetailsListProps {
   addButton?: boolean;
 }
 
-interface DropdownProps {
+export interface DropdownProps {
   name: string;
   click: () => void;
 }
@@ -43,7 +43,7 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
   const handleSubmit = () => {
     setData([
       ...data,
-      { id: new Date().getTime(), name: valueInput, status: 'todo ' },
+      { id: new Date().getTime(), name: valueInput, status: 'Todo' },
     ]);
   };
 
@@ -74,13 +74,13 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
       )}
       {isAddCardDetails && (
         <div className="styled-card-detail-list-cardDetails">
-          <CardDetails label={data[0].name} dropdown={[]} />
+          <CardDetails label={data[0].name} dropdown={dropdown} />
         </div>
       )}
       {data.length > 0 && (
         <div className="styled-card-detail-list-cardDetails">
           {data.map((item) => (
-            <CardDetails key={item.id} label={item.name} dropdown={[]} />
+            <CardDetails key={item.id} label={item.name} dropdown={dropdown} />
           ))}
         </div>
       )}

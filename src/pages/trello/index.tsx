@@ -53,8 +53,58 @@ const Trello = () => {
     return multiData;
   };
 
-  const handelClick = () => {
-    console.log('clicked');
+  const onClickDeleteCard = (item: DataProps) => {
+    // const updatedData = data.filter((item) => item.id !== selectedId);
+    // setData(updatedData);
+  };
+
+  const getDropdownOptions = (statusTitle: string, item: any) => {
+    if (statusTitle === 'Todo') {
+      return [
+        {
+          name: 'In Progress',
+          click: () => {},
+        },
+        {
+          name: 'Update',
+          click: () => {},
+        },
+        {
+          name: 'Delete',
+          click: () => {
+            onClickDeleteCard(item);
+          },
+        },
+      ];
+    } else if (statusTitle === 'In Progress') {
+      return [
+        {
+          name: 'Done',
+          click: () => {},
+        },
+        {
+          name: 'Update',
+          click: () => {},
+        },
+        {
+          name: 'Delete',
+          click: () => {},
+        },
+      ];
+    } else if (statusTitle === 'Done') {
+      return [
+        {
+          name: 'Update',
+          click: () => {},
+        },
+        {
+          name: 'Delete',
+          click: () => {},
+        },
+      ];
+    } else {
+      return [];
+    }
   };
 
   return (
@@ -62,19 +112,12 @@ const Trello = () => {
       <div className="styled-trello">
         {multipleData(data).map((item) => (
           <CardDetailsList
-            addButton={item.title === 'todo' ? true : false}
-            addInput={item.title === 'todo' && 'in_progress' ? true : false}
+            addButton={item.title === 'Todo' ? true : false}
+            addInput={item.title === 'Todo' && 'In Progress' ? true : false}
             key={item.id}
             label={item.title}
-            dropdown={[
-              {
-                name: 'In Progress',
-                click: () => {
-                  handelClick();
-                },
-              },
-            ]}
-            data={item.data}
+            dropdown={getDropdownOptions(item.title, item)}
+            data={item.data as DataProps[]}
             setData={setData}
           />
         ))}
