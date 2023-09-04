@@ -74,13 +74,18 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
       )}
       {isAddCardDetails && (
         <div className="styled-card-detail-list-cardDetails">
-          <CardDetails label={data[0].name} dropdown={dropdown} />
+          <CardDetails label={data[0].name} dropdown={dropdown} color="white" />
         </div>
       )}
       {data.length > 0 && (
         <div className="styled-card-detail-list-cardDetails">
           {data.map((item) => (
-            <CardDetails key={item.id} label={item.name} dropdown={dropdown} />
+            <CardDetails
+              key={item.id}
+              label={item.name}
+              dropdown={dropdown}
+              color={item.status === 'done' ? 'gray' : 'white'}
+            />
           ))}
         </div>
       )}

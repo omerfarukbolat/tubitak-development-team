@@ -2,16 +2,20 @@
   display: inline-flex;
   align-items: center;
   padding: 10px;
-  background-color: #ffffff;
-  border: solid rgb(174, 214, 173) 1px;
+  border: solid rgb(220, 233, 215) 1px;
   border-radius: 5px;
   margin: 10px;
-  min-height: 45px;
+  min-height: 30px;
   width: 200px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   position: relative;
   padding-right: 45px;
   flex-wrap: wrap;
+}
+.styled-card-detail.colour-gray {
+  background-color: rgb(206, 206, 206);
+}
+.styled-card-detail.colour-white {
+  background-color: #ffffff;
 }
 
 .styled-card-detail-form {
