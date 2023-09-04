@@ -5,6 +5,8 @@
   font-weight: 600;
   border: none;
   cursor:pointer;
+  height: 30px;
+  line-height: 15px;
 }
 
 .styled-button.colour-white {

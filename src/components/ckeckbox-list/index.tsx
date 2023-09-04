@@ -5,7 +5,7 @@ import './index.css';
 
 interface CheckboxListData {
   label: string;
-  active: boolean;
+  isCompleted: boolean;
 }
 
 interface DropdownData {
@@ -24,19 +24,19 @@ const CheckboxList: React.FC<CheckboxListProps> = ({ data, dropdownData }) => {
   );
 
   const handleCheckboxChange = (index: number) => {
-    const updatedCheckboxData = [...checkboxData];
-    updatedCheckboxData[index].active = !updatedCheckboxData[index].active;
+    const updatedCheckboxData = [...data];
+    updatedCheckboxData[index].isCompleted = !updatedCheckboxData[index].isCompleted;
     setCheckboxData(updatedCheckboxData);
   };
 
   return (
     <div className="styled-checkbox-list">
-      {checkboxData.map((item, index) => (
+      {data.map((item, index) => (
         <div className="styled-checkbox-list-checkboxLabel" key={index}>
           <CheckboxLabel
             label={item.label}
-            setActive={() => handleCheckboxChange(index)}
-            active={item.active}
+            setIsCompleted={() => handleCheckboxChange(index)}
+            isCompleted={item.isCompleted}
           />
           <div className="styled-checkbox-list-dropdown">
             <Dropdown data={dropdownData} isReverse={false} />

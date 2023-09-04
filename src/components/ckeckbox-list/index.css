@@ -22,8 +22,6 @@
     margin-left: auto;
   }
   
-  .styled-checkbox-list-checkboxLabel:last-child {
-    border-bottom: none; /* Son öğenin altına çizgi eklemeyi engelle */
-  }
+
   
   
