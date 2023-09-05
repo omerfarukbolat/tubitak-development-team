@@ -39,12 +39,13 @@ const AddNote: React.FC<AddNoteButtonProps> = ({ onAddNote }) => {
     <div className="styled-addNote-container">
       {showForm ? (
         <div className="styled-addNote">
-          <Input label="Title" value={title} onChange={setTitle} />
-          
+          <Input label="Title" maxWidth value={title} onChange={setTitle} />
+
           <TextArea
             label="Description"
             value={description}
             onChange={setDescription}
+            maxWidth
           />
 
           <div className="styled-addNote-buttons">
@@ -65,4 +66,3 @@ const AddNote: React.FC<AddNoteButtonProps> = ({ onAddNote }) => {
 };
 
 export default AddNote;
-

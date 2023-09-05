@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import './note.css';
 import Dropdown from '../dropdown';
@@ -58,14 +57,16 @@ const Note: React.FC<NoteProps> = ({ data, onEditNote, onDeleteNote }) => {
   return (
     <div className="styled-note-container">
       <div className="styled-note-content">
-        <h3 className="styled-note-title">
+        <div className="styled-note-title">
           {isEditMode ? (
             <>
               <Input
                 value={title}
                 onChange={(e) => setTitle(e)}
                 label="Title"
+                maxWidth
               />
+
               <div>
                 <button
                   className="styled-close-button"
@@ -78,13 +79,14 @@ const Note: React.FC<NoteProps> = ({ data, onEditNote, onDeleteNote }) => {
           ) : (
             title
           )}
-        </h3>
+        </div>
         <div className="styled-note-description">
           {isEditMode ? (
             <TextArea
               value={description}
               onChange={(e) => setDescription(e)}
               label="Description"
+              maxWidth
             />
           ) : (
             description
@@ -104,7 +106,7 @@ const Note: React.FC<NoteProps> = ({ data, onEditNote, onDeleteNote }) => {
             ]}
           />
         </div>
-        <p className="styled-note-date">{formattedDate}</p>
+        <div className="styled-note-date">{formattedDate}</div>
       </div>
     </div>
   );

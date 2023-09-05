@@ -5,7 +5,6 @@
   border: 1px solid #ccc;
   border-radius: 2%;
   position: relative;
-  padding: 0;
   margin: 10px;
   height: 302px;
   width: 300px;
@@ -13,50 +12,45 @@
   display: inline-block;
 }
 
-/*
+
 .styled-note-content {
   display: flex;
   flex-direction: column;
   height: 100%;
   position: relative;
-  width: 300px;
-  height: 380px;
-} */
+} 
 
 .styled-note-title {
   margin: 0;
   padding: 0;
   font-size: 1.5rem;
   margin-left: 20px;
-  margin-bottom: 5px;
-  margin-top: 10px ;
-  word-wrap: break-word;
+  margin-right: 20px;
+  text-align: left;
   overflow-wrap: break-word;
 }
 
 .styled-note-description {
-  margin: 0;
-  margin-top: 0;
-  margin-left: 20px;
-  left: 20px;
+  margin: 0 20px;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
 .styled-note-date {
   font-size: 0.9rem;
+  padding: 10px;
   color: #777;
   position: absolute;
-  bottom: 2%;
-  left: 20px;
+  bottom: 1%;
+  left: 10px;
 }
 
 .styled-note-dropdown {
   font-size: 0.9rem;
   color: #777;
   position: absolute;
-  bottom: 4%;
-  right: 25px;
+  bottom: 2%;
+  right: 15px;
 }
 
 /*
@@ -77,6 +71,6 @@
   border: none;
   color: #777;
   position: absolute;
-  top: 5%;
-  right: 13px;
+  top: 6px;
+  right: 10px;
 }

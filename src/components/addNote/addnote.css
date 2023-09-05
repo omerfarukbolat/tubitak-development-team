@@ -3,8 +3,9 @@
     border-radius: 10px;
     width: 10%;
     padding-right: 4%;
-    margin-left: 20px;
+    margin-left: 10px;
     padding-top: 10px;
+    
 
 }
 
@@ -16,8 +17,8 @@
     background-color: #3498db;
     width: 300px;
     height: 302px;
-    padding-top: 0px;
     border-radius: 10px;
+    
 }
 
 
@@ -37,18 +38,18 @@
     align-items: center;
     justify-content: center;
     font-weight: 600;
+    
 }
+
 
 .styled-addNotes{
     background-color: blue;
-    height: 300px;
+    height: 302px;
     width: 300px;
     border: none;
     outline: none;
     border-radius: 10px;
     cursor: pointer;
-    
-
     
 }
 
@@ -88,10 +89,10 @@
 .styled-addNotes-icon::before, .styled-addNotes-icon::after {
     content: "";
     display: block;
-    /* position: absolute;
+    position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate (-50%, -50%); */
+    transform: translate (-50%, -50%); 
     width: 30px;
     background-color: white;
     height: 2px;
