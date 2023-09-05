@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import './note.css';
 import Dropdown from '../dropdown';
@@ -89,7 +90,9 @@ const Note: React.FC<NoteProps> = ({ data, onEditNote, onDeleteNote }) => {
             description
           )}
         </div>
-        <hr className="hr" />
+
+        {/* <hr className="hr" /> */}
+
         <div className="styled-note-dropdown">
           <Dropdown
             data={[

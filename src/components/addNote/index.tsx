@@ -40,7 +40,7 @@ const AddNote: React.FC<AddNoteButtonProps> = ({ onAddNote }) => {
       {showForm ? (
         <div className="styled-addNote">
           <Input label="Title" value={title} onChange={setTitle} />
-
+          
           <TextArea
             label="Description"
             value={description}
@@ -65,3 +65,4 @@ const AddNote: React.FC<AddNoteButtonProps> = ({ onAddNote }) => {
 };
 
 export default AddNote;
+
