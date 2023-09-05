@@ -52,8 +52,6 @@ const Todo = () => {
     const updatedApiData = apiData.filter((task) => !task.isCompleted);
     setApiData(updatedApiData);
   };
-  
-
 
   const getDropdownData = (task: {
     id: number;
@@ -140,7 +138,7 @@ const Todo = () => {
             onClick={() => handleClearAll()}
           />
         </div>
-        <div className='styled-todo-tabs-end'></div>
+        <div className="styled-todo-tabs-end"></div>
         {reversedData.map((task) =>
           editingTaskId === task.id ? (
             <div>
@@ -166,8 +164,7 @@ const Todo = () => {
             />
           )
         )}
-                <div className='styled-todo-list-end'></div>
-
+        <div className="styled-todo-list-end"></div>
       </div>
     </Container>
   );

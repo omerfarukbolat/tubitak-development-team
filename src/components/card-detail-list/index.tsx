@@ -5,13 +5,15 @@ import Input from '../input';
 import './card-detail-list.css';
 
 interface CardDetailsListProps {
-  label?: string;
+  label?: string | null | undefined;
   dropdown: DropdownProps[];
   data: DataProps[];
   setData: (data: DataProps[]) => void;
+  addInput?: boolean;
+  addButton?: boolean;
 }
 
-interface DropdownProps {
+export interface DropdownProps {
   name: string;
   click: () => void;
 }
@@ -19,6 +21,7 @@ interface DropdownProps {
 export interface DataProps {
   id: number;
   name: string;
+  status: string;
 }
 
 const CardDetailsList: React.FC<CardDetailsListProps> = ({
@@ -26,16 +29,22 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
   dropdown,
   data,
   setData,
+  addInput = false,
+  addButton = false,
 }) => {
   const [valueInput, setValueInput] = useState<string>('');
   const [isShow, setIsShow] = useState(false);
+  const [isAddCardDetails, setIsAddCardDetails] = useState(false);
 
   const showInput = () => {
     setIsShow(true);
   };
 
   const handleSubmit = () => {
-    setData([...data, { name: valueInput, id: new Date().getTime() }]);
+    setData([
+      ...data,
+      { id: new Date().getTime(), name: valueInput, status: 'Todo' },
+    ]);
   };
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -48,11 +57,13 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
 
   return (
     <div className="styled-card-detail-list">
-      <div className="styled-card-detail-list-button">
-        <Button label="Add Card" onClick={showInput} />
-      </div>
+      {addButton && (
+        <div className="styled-card-detail-list-button">
+          <Button label="Add Card" onClick={showInput} />
+        </div>
+      )}
       <div className="styled-card-detail-list-label">{label}</div>
-      {isShow && (
+      {isShow && addInput && (
         <div className="styled-card-detail-list-input">
           <Input
             value={valueInput}
@@ -61,10 +72,20 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
           />
         </div>
       )}
+      {isAddCardDetails && (
+        <div className="styled-card-detail-list-cardDetails">
+          <CardDetails label={data[0].name} dropdown={dropdown} color="white" />
+        </div>
+      )}
       {data.length > 0 && (
         <div className="styled-card-detail-list-cardDetails">
           {data.map((item) => (
-            <CardDetails key={item.id} label={item.name} dropdown={dropdown} />
+            <CardDetails
+              key={item.id}
+              label={item.name}
+              dropdown={dropdown}
+              color={item.status === 'done' ? 'gray' : 'white'}
+            />
           ))}
         </div>
       )}

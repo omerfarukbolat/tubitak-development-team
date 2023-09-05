@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "Buy medicines",
+    "status": "todo"
+  },
+  {
+    "id": 2,
+    "name": "Go to the dentist",
+    "status": "todo"
+  },
+  {
+    "id": 3,
+    "name": "Go to the shopping",
+    "status": "todo"
+  },
+  {
+    "id": 4,
+    "name": "Grandpa birtday",
+    "status": "in_progress"
+  },
+  {
+    "id": 5,
+    "name": "Buy the suitcase",
+    "status": "in_progress"
+  },
+  {
+    "id": 6,
+    "name": "Buy the motocycle",
+    "status": "in_progress"
+  },
+  {
+    "id": 7,
+    "name": "Mobile Phone",
+    "status": "done"
+  },
+  {
+    "id": 8,
+    "name": "Buy the Car",
+    "status": "done"
+  },
+  {
+    "id": 9,
+    "name": "Call Ömer",
+    "status": "done"
+  },
+  {
+    "id": 10,
+    "name": "Update App content",
+    "status": "done"
+  }
+]
