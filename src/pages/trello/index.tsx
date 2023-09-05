@@ -53,59 +53,29 @@ const Trello = () => {
     return multiData;
   };
 
-  const onClickDeleteCard = (item: DataProps) => {
-    // const updatedData = data.filter((item) => item.id !== selectedId);
-    // setData(updatedData);
+  // const onClickDeleteCard = (item: DataProps) => {
+  //   // const updatedData = data.filter((item) => item.id !== selectedId);
+  //   // setData(updatedData);
+  //   console.log(item);
+  // };
+
+  const dropdownHandleNextTo = (item: DataProps, nextStatus: string) => {
+    console.log('bir item alabildik mi', item);
+    console.log(nextStatus);
+
+    const birItemEskiSilecek: any = data.filter((fi) => fi.id !== item.id); // silecek neden çünkü status: todo var bu silmesi lazım bundan sonra
+    const birItemSectiğimdeAlalim: DataProps | undefined = data.find(
+      // data şu item seçtiğimde alacağız içinde yeni status güncellenmek için diye
+      (fi) => fi.id === item.id
+    );
+
+    setData([
+      ...birItemEskiSilecek,
+      { ...birItemSectiğimdeAlalim, status: nextStatus },
+    ]);
   };
 
-  const getDropdownOptions = (statusTitle: string, item: any) => {
-    if (statusTitle === 'Todo') {
-      return [
-        {
-          name: 'In Progress',
-          click: () => {},
-        },
-        {
-          name: 'Update',
-          click: () => {},
-        },
-        {
-          name: 'Delete',
-          click: () => {
-            onClickDeleteCard(item);
-          },
-        },
-      ];
-    } else if (statusTitle === 'In Progress') {
-      return [
-        {
-          name: 'Done',
-          click: () => {},
-        },
-        {
-          name: 'Update',
-          click: () => {},
-        },
-        {
-          name: 'Delete',
-          click: () => {},
-        },
-      ];
-    } else if (statusTitle === 'Done') {
-      return [
-        {
-          name: 'Update',
-          click: () => {},
-        },
-        {
-          name: 'Delete',
-          click: () => {},
-        },
-      ];
-    } else {
-      return [];
-    }
-  };
+  console.log(data);
 
   return (
     <Container>
@@ -116,9 +86,10 @@ const Trello = () => {
             addInput={item.title === 'Todo' && 'In Progress' ? true : false}
             key={item.id}
             label={item.title}
-            dropdown={getDropdownOptions(item.title, item)}
             data={item.data as DataProps[]}
             setData={setData}
+            dropdownTitles={onlyStatusAddInArr(data)}
+            dropdownNextClick={dropdownHandleNextTo}
           />
         ))}
       </div>

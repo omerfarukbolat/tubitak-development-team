@@ -6,11 +6,12 @@ import './card-detail-list.css';
 
 interface CardDetailsListProps {
   label?: string | null | undefined;
-  dropdown: DropdownProps[];
   data: DataProps[];
   setData: (data: DataProps[]) => void;
   addInput?: boolean;
   addButton?: boolean;
+  dropdownTitles: any[];
+  dropdownNextClick?: (item: DataProps, nextStatus: string) => void;
 }
 
 export interface DropdownProps {
@@ -26,15 +27,15 @@ export interface DataProps {
 
 const CardDetailsList: React.FC<CardDetailsListProps> = ({
   label,
-  dropdown,
   data,
   setData,
   addInput = false,
   addButton = false,
+  dropdownTitles = [],
+  dropdownNextClick,
 }) => {
   const [valueInput, setValueInput] = useState<string>('');
   const [isShow, setIsShow] = useState(false);
-  const [isAddCardDetails, setIsAddCardDetails] = useState(false);
 
   const showInput = () => {
     setIsShow(true);
@@ -55,6 +56,60 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
     }
   };
 
+  const dropdownStatusNext = (title: string | null | undefined) => {
+    let dropdownName = '';
+    const dropdownIndex = dropdownTitles.indexOf(title);
+
+    if (dropdownIndex !== -1 && dropdownIndex < dropdownTitles.length - 1) {
+      dropdownName = dropdownTitles[dropdownIndex + 1];
+    } else {
+      dropdownName = '';
+    }
+
+    return dropdownName;
+  };
+
+  const titleFormatted = (title: string | null | undefined) => {
+    if (title) {
+      if (title.split('_')[1]) {
+        return title
+          .split('_')
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+      } else {
+        return title.charAt(0).toUpperCase() + title.slice(1);
+      }
+    }
+  };
+
+  const getDropdowns = (item: DataProps) => {
+    let dropdownArr: any[] = [];
+
+    if (dropdownStatusNext(item.status)) {
+      dropdownArr.push({
+        name: titleFormatted(dropdownStatusNext(item.status)),
+        click: () =>
+          dropdownNextClick &&
+          dropdownNextClick(item, dropdownStatusNext(item.status)),
+      });
+    } else {
+      dropdownArr = [];
+    }
+
+    const updateAndRemove = [
+      {
+        name: 'Update',
+        click: () => console.log(item), // drpodownDeleteClick
+      },
+      {
+        name: 'Delete',
+        click: () => console.log(item), // dropdownUpdateClick
+      },
+    ];
+
+    return [...dropdownArr, ...updateAndRemove];
+  };
+
   return (
     <div className="styled-card-detail-list">
       {addButton && (
@@ -72,18 +127,13 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
           />
         </div>
       )}
-      {isAddCardDetails && (
-        <div className="styled-card-detail-list-cardDetails">
-          <CardDetails label={data[0].name} dropdown={dropdown} color="white" />
-        </div>
-      )}
       {data.length > 0 && (
         <div className="styled-card-detail-list-cardDetails">
           {data.map((item) => (
             <CardDetails
               key={item.id}
               label={item.name}
-              dropdown={dropdown}
+              dropdown={getDropdowns(item)}
               color={item.status === 'done' ? 'gray' : 'white'}
             />
           ))}
