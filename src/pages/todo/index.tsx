@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from '../../components/container';
 import Input from '../../components/input';
 import './todo.css';
@@ -12,10 +12,8 @@ const Todo = () => {
   const [newTask, setNewTask] = useState('');
   const [apiData, setApiData] = useState(data.apiData || []);
   const [filteredData, setFilteredData] = useState(apiData);
-  const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState('');
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
-  const [dropdownData, setDropdownData] = useState([]);
 
   const tabData = data.tabData;
 
