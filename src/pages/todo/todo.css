@@ -15,23 +15,20 @@
 .styled-tabs {
   margin-right: auto;
 }
+
 .styled-button {
   margin-left: auto;
 }
 
-.styled-input {
-  width: 320px;
-}
-
 .styled-todo-tabs-end {
   border-bottom: 1px solid #9f9090;
-  width: 390px;
+  width: 350px;
   margin-left: -20px;
 }
 
 .styled-todo-list-end {
   border-bottom: 1px solid #9f9090;
-  width: 390px;
+  width: 350px;
   margin-left: -20px;
   padding-top: 20px;
 }

@@ -12,12 +12,21 @@
   background: none;
   border: none;
   cursor: pointer;
-
+  font-size: 14px;
 }
 
 .styled-tabs-button.active {
-  color: blue;
-  border-bottom: 2px solid blue;
+  color: blue; 
+  position: relative; 
 }
 
-
+.styled-tabs-button.active::after {
+  content: "";
+  position: absolute;
+  bottom: -2px; 
+  left: 0; 
+  right: 0;
+  height: 2px; 
+  background-color: blue;
+  margin: 0 5px; 
+}
