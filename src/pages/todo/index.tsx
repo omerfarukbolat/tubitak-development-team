@@ -127,6 +127,7 @@ const Todo = () => {
           value={newTask}
           onChange={(newValue) => setNewTask(newValue)}
           onKeyDown={handleInputKeyDown}
+          maxWidth={true}
         />
 
         <div className="styled-todo-tabs">
