@@ -154,6 +154,8 @@ const Todo = () => {
                     cancelEdit();
                   }
                 }}
+                maxWidth={true}
+
               />
             </div>
           ) : (
