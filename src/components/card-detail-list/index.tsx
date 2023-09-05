@@ -12,6 +12,9 @@ interface CardDetailsListProps {
   addButton?: boolean;
   dropdownTitles: any[];
   dropdownNextClick?: (item: DataProps, nextStatus: string) => void;
+  dropdownDeleteClick?: (item: DataProps) => void;
+  updatedItem?: (item: DataProps) => void;
+  addItem?: (item: DataProps) => void;
 }
 
 export interface DropdownProps {
@@ -33,19 +36,34 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
   addButton = false,
   dropdownTitles = [],
   dropdownNextClick,
+  dropdownDeleteClick,
+  updatedItem,
+  addItem,
 }) => {
   const [valueInput, setValueInput] = useState<string>('');
+  const [valueInputUpdate, setValueInputUpdate] = useState<string>('');
   const [isShow, setIsShow] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<DataProps>({
+    id: 0,
+    name: '',
+    status: '',
+  });
 
   const showInput = () => {
     setIsShow(true);
   };
 
   const handleSubmit = () => {
-    setData([
-      ...data,
-      { id: new Date().getTime(), name: valueInput, status: 'Todo' },
-    ]);
+    if (addItem) {
+      addItem({ id: new Date().getTime(), name: valueInput, status: 'todo' });
+    }
+  };
+
+  const handleSubmitUpdate = () => {
+    if (updatedItem) {
+      updatedItem({ ...selectedItem, name: valueInputUpdate });
+    }
   };
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -53,6 +71,13 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
       handleSubmit();
       setIsShow(false);
       setValueInput('');
+    }
+  };
+  const handleKeyPressUpdate = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setValueInputUpdate('');
+      setIsEdit(false);
+      handleSubmitUpdate();
     }
   };
 
@@ -99,11 +124,17 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
     const updateAndRemove = [
       {
         name: 'Update',
-        click: () => console.log(item), // drpodownDeleteClick
+        click: () => {
+          setIsEdit(true);
+          setSelectedItem(item);
+          setValueInputUpdate(item.name);
+        },
       },
       {
         name: 'Delete',
-        click: () => console.log(item), // dropdownUpdateClick
+        click: () => {
+          dropdownDeleteClick && dropdownDeleteClick(item);
+        },
       },
     ];
 
@@ -124,6 +155,16 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
             value={valueInput}
             onChange={setValueInput}
             onKeyUp={handleKeyPress}
+          />
+        </div>
+      )}
+      {isEdit && (
+        <div>
+          <Input
+            value={valueInputUpdate}
+            onChange={setValueInputUpdate}
+            onKeyUp={handleKeyPressUpdate}
+            maxWidth
           />
         </div>
       )}

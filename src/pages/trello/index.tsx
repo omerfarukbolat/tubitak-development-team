@@ -52,30 +52,31 @@ const Trello = () => {
     }
     return multiData;
   };
+  const onClickDeleteCard = (item: DataProps) => {
+    const oldItemForDelete = data.filter((fi) => fi.id !== item.id);
+    setData(oldItemForDelete);
+  };
+  const onClickUpdatedCard = (item: DataProps) => {
+    const oldItemForDelete = data.filter((fi) => fi.id !== item.id);
 
-  // const onClickDeleteCard = (item: DataProps) => {
-  //   // const updatedData = data.filter((item) => item.id !== selectedId);
-  //   // setData(updatedData);
-  //   console.log(item);
-  // };
+    setData([...oldItemForDelete, item]);
+  };
+
+  const addNewItemToCard = (item: DataProps) => {
+    setData([...data, item]);
+  };
 
   const dropdownHandleNextTo = (item: DataProps, nextStatus: string) => {
-    console.log('bir item alabildik mi', item);
-    console.log(nextStatus);
-
-    const birItemEskiSilecek: any = data.filter((fi) => fi.id !== item.id); // silecek neden çünkü status: todo var bu silmesi lazım bundan sonra
-    const birItemSectiğimdeAlalim: DataProps | undefined = data.find(
-      // data şu item seçtiğimde alacağız içinde yeni status güncellenmek için diye
+    const oldItemForDelete: any = data.filter((fi) => fi.id !== item.id);
+    const selectedItemForLifting: DataProps | undefined = data.find(
       (fi) => fi.id === item.id
     );
 
     setData([
-      ...birItemEskiSilecek,
-      { ...birItemSectiğimdeAlalim, status: nextStatus },
+      ...oldItemForDelete,
+      { ...selectedItemForLifting, status: nextStatus },
     ]);
   };
-
-  console.log(data);
 
   return (
     <Container>
@@ -90,6 +91,9 @@ const Trello = () => {
             setData={setData}
             dropdownTitles={onlyStatusAddInArr(data)}
             dropdownNextClick={dropdownHandleNextTo}
+            dropdownDeleteClick={onClickDeleteCard}
+            updatedItem={onClickUpdatedCard}
+            addItem={addNewItemToCard}
           />
         ))}
       </div>
