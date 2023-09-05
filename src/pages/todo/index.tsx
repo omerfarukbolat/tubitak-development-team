@@ -47,7 +47,7 @@ const Todo = () => {
     };
 
     updateFilteredData();
-  }, [activeTab, apiData, filteredData]);
+  }, [activeTab, apiData]);
   const handleClearAll = () => {
     const updatedApiData = apiData.filter((task) => !task.isCompleted);
     setApiData(updatedApiData);
@@ -118,7 +118,6 @@ const Todo = () => {
 
   return (
     <Container>
-      <h1>Todo App</h1>
       <div className="styled-todo">
         <Input
           placeholder="Add a new task"
