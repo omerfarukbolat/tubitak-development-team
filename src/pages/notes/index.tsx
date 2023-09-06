@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import AddNote, { NoteItemProps } from '../../components/addNote';
 import Container from '../../components/container';
@@ -64,3 +65,4 @@ const Notes: React.FC = () => {
 };
 
 export default Notes;
+
