@@ -1,0 +1,15 @@
+[
+  {
+    "id": "1",
+    "title": "Note Example 1",
+    "description": "That is a note example description",
+    "date": "28-08-23"
+  },
+
+  {
+    "id": "2",
+    "title": "Note Example 2",
+    "description": "That is a description for note example 2",
+    "date": "2023-08-30T09:00:00.000Z"
+  }
+]

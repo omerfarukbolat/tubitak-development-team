@@ -4,7 +4,7 @@ import Input from '../input';
 import TextArea from '../textArea';
 import Button from '../button';
 export interface NoteItemProps {
-  id: string;
+  id: number;
   title: string;
   description: string;
   date: Date;
@@ -22,7 +22,7 @@ const AddNote: React.FC<AddNoteButtonProps> = ({ onAddNote }) => {
   const handleAddNote = () => {
     if (title && description) {
       const newNote: NoteItemProps = {
-        id: String(Date.now()),
+        id: new Date().getTime(),
         title: title,
         description: description,
         date: new Date(),
@@ -48,8 +48,8 @@ const AddNote: React.FC<AddNoteButtonProps> = ({ onAddNote }) => {
           />
 
           <div className="styled-addNote-buttons">
-            <Button onClick={handleAddNote} label='Add Note'/>
-            <Button onClick={() => setShowForm(false)} label='Cancel'/>
+            <Button onClick={handleAddNote} label="Add Note" />
+            <Button onClick={() => setShowForm(false)} label="Cancel" />
           </div>
         </div>
       ) : (
