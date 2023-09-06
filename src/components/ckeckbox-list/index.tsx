@@ -4,6 +4,7 @@ import Dropdown from '../dropdown';
 import './index.css';
 
 interface CheckboxListData {
+  id: number;
   label: string;
   isCompleted: boolean;
 }
@@ -16,17 +17,17 @@ interface DropdownData {
 interface CheckboxListProps {
   data: CheckboxListData[];
   dropdownData: DropdownData[];
+  onCheckboxChange: (taskId: number, isCompleted: boolean) => void;
 }
 
-const CheckboxList: React.FC<CheckboxListProps> = ({ data, dropdownData }) => {
-  const [checkboxData, setCheckboxData] = useState(
-    data.map((item) => ({ ...item }))
-  );
+const CheckboxList: React.FC<CheckboxListProps> = ({ data, dropdownData, onCheckboxChange }) => {
+  const [checkboxData, setCheckboxData] = useState(data.map((item) => ({ ...item })));
 
   const handleCheckboxChange = (index: number) => {
-    const updatedCheckboxData = [...data];
+    const updatedCheckboxData = [...checkboxData];
     updatedCheckboxData[index].isCompleted = !updatedCheckboxData[index].isCompleted;
     setCheckboxData(updatedCheckboxData);
+    onCheckboxChange(updatedCheckboxData[index].id, updatedCheckboxData[index].isCompleted);
   };
 
   return (

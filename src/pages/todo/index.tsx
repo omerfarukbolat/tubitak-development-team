@@ -114,7 +114,12 @@ const Todo = () => {
     );
     setApiData(updatedApiData);
   };
-
+  const handleCheckboxChangeInTodo = (taskId: number) => {
+    const updatedApiData = apiData.map((task) =>
+      task.id === taskId ? { ...task, isCompleted: !task.isCompleted } : task
+    );
+    setApiData(updatedApiData);
+  };
   return (
     <Container>
       <div className="styled-todo">
@@ -159,6 +164,8 @@ const Todo = () => {
               key={task.id}
               data={[task]}
               dropdownData={getDropdownData(task)}
+              onCheckboxChange={() => handleCheckboxChangeInTodo(task.id)}
+
             />
           )
         )}
