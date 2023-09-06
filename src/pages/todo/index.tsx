@@ -57,35 +57,29 @@ const Todo = () => {
     label: string;
     isCompleted: boolean;
   }) => {
+    const commonOptions = [
+      {
+        name: 'Update',
+        click: () => handleEditTask(task.id),
+      },
+      {
+        name: task.isCompleted ? 'Not Completed' : 'Completed',
+        click: () => handleToggleCompleted(task.id),
+      },
+    ];
+
     if (task.isCompleted) {
       return [
-        {
-          name: 'Update',
-          click: () => handleEditTask(task.id),
-        },
+        ...commonOptions,
         {
           name: 'Delete',
           click: () => handleDeleteTask(task.id),
         },
-        {
-          name: 'Not Completed',
-          click: () => handleToggleCompleted(task.id),
-        },
       ];
     } else {
-      return [
-        {
-          name: 'Update',
-          click: () => handleEditTask(task.id),
-        },
-        {
-          name: 'Completed',
-          click: () => handleToggleCompleted(task.id),
-        },
-      ];
+      return commonOptions;
     }
   };
-
   const handleDeleteTask = (taskId: number) => {
     const updatedApiData = apiData.filter((task) => task.id !== taskId);
     setApiData(updatedApiData);
