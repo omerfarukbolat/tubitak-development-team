@@ -26,7 +26,6 @@ const Todo = () => {
       };
       setApiData([...apiData, newTaskItem]);
       setNewTask('');
-      console.log(newTaskItem);
     }
   };
   useEffect(() => {
