@@ -36,9 +36,9 @@ const AddNote: React.FC<AddNoteButtonProps> = ({ onAddNote }) => {
   };
 
   return (
-    <div className="styled-addNote-container">
+    <div className="styled-addNote">
       {showForm ? (
-        <div className="styled-addNote">
+        <div className="styled-addNote-inputs">
           <Input label="Title" maxWidth value={title} onChange={setTitle} />
 
           <TextArea

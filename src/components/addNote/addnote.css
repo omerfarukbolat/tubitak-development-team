@@ -1,26 +1,24 @@
-.styled-addNote-container{
+.styled-addNote{
     /* background-color: white; */
     border-radius: 10px;
     width: 10%;
-    padding-right: 4%;
-    margin-left: 10px;
+    margin-left: 9px;
     padding-top: 10px;
-    
-
 }
 
-.styled-addNote{
+.styled-addNote-inputs{
     display: flex;
     flex-direction: column;
     font-weight: bold;
-    padding-left: 20px;
+    padding-left: 20px ;
+    padding-right: 20px;
+    padding-top: 20px;
     background-color: #3498db;
     width: 300px;
     height: 302px;
     border-radius: 10px;
     
 }
-
 
 
 .addNew{
@@ -41,7 +39,6 @@
     
 }
 
-
 .styled-addNotes{
     background-color: blue;
     height: 302px;
@@ -50,19 +47,18 @@
     outline: none;
     border-radius: 10px;
     cursor: pointer;
+}
+
+
+.styled-addNote-buttons {
+    display: flex;
+    margin: 10px;
+    margin-left: 90px;
+    margin-right: 10px;
+    gap: 10px;
     
 }
 
-.styled-addNote-buttons{
-    position: relative;
-    margin: 62px;
-    padding: 0;
-    left: 30px;
-    margin-top: 0;
-    display: flex;
-    gap: 5px;
-    
-}
 
 .styled-addNotes-label{
     font-size: 14px;
@@ -116,3 +112,5 @@
     left: 35%;
 
 }
+
+

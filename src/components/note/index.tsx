@@ -55,7 +55,7 @@ const Note: React.FC<NoteProps> = ({ data, onEditNote, onDeleteNote }) => {
   };
 
   return (
-    <div className="styled-note-container">
+    <div className="styled-note">
       <div className="styled-note-content">
         <div className="styled-note-title">
           {isEditMode ? (
