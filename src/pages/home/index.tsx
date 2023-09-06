@@ -1,12 +1,13 @@
 import { useDispatch } from 'react-redux';
 import Button from '../../components/button';
 import { openModal } from '../../store/reducers/modalReducer';
+import Container from '../../components/container';
 
 const Home = () => {
   const dispatch = useDispatch();
 
   return (
-    <div>
+    <Container>
       <h1>Home Page</h1>
       <Button
         label="aç modal yeni eklemek"
@@ -19,7 +20,7 @@ const Home = () => {
           )
         }
       />
-    </div>
+    </Container>
   );
 };
 
