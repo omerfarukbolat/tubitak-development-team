@@ -7,6 +7,7 @@ interface InputProps {
   value: string;
   name?: string;
   maxWidth?: boolean;
+  width?: number;
   onChange: (newValue: string) => void;
   onKeyDown?: KeyboardEventHandler<HTMLInputElement> | undefined;
   onKeyUp?: (event: KeyboardEvent<HTMLInputElement>) => void;
@@ -18,6 +19,7 @@ const Input: React.FC<InputProps> = ({
   value,
   name,
   maxWidth = false,
+  width = 260,
   onKeyDown,
   onChange,
   onKeyUp,
@@ -28,7 +30,7 @@ const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <div className={`styled-input ${maxWidth ? 'maxWidth' : ''}`}>
+    <div style={{ width: maxWidth ? '100%' : width }} className="styled-input">
       {label && <label className="styled-input-label">{label}</label>}
       <input
         className="styled-input-form"

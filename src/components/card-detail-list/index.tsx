@@ -6,11 +6,15 @@ import './card-detail-list.css';
 
 interface CardDetailsListProps {
   label?: string | null | undefined;
-  dropdown: DropdownProps[];
   data: DataProps[];
   setData: (data: DataProps[]) => void;
   addInput?: boolean;
   addButton?: boolean;
+  dropdownTitles: any[];
+  dropdownNextClick?: (item: DataProps, nextStatus: string) => void;
+  dropdownDeleteClick?: (item: DataProps) => void;
+  updatedItem?: (item: DataProps) => void;
+  addItem?: (item: DataProps) => void;
 }
 
 export interface DropdownProps {
@@ -26,25 +30,39 @@ export interface DataProps {
 
 const CardDetailsList: React.FC<CardDetailsListProps> = ({
   label,
-  dropdown,
   data,
-  setData,
   addInput = false,
   addButton = false,
+  dropdownTitles = [],
+  dropdownNextClick,
+  dropdownDeleteClick,
+  updatedItem,
+  addItem,
 }) => {
   const [valueInput, setValueInput] = useState<string>('');
+  const [valueInputUpdate, setValueInputUpdate] = useState<string>('');
   const [isShow, setIsShow] = useState(false);
-  const [isAddCardDetails, setIsAddCardDetails] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<DataProps>({
+    id: 0,
+    name: '',
+    status: '',
+  });
 
   const showInput = () => {
     setIsShow(true);
   };
 
   const handleSubmit = () => {
-    setData([
-      ...data,
-      { id: new Date().getTime(), name: valueInput, status: 'Todo' },
-    ]);
+    if (addItem) {
+      addItem({ id: new Date().getTime(), name: valueInput, status: 'todo' });
+    }
+  };
+
+  const handleSubmitUpdate = () => {
+    if (updatedItem) {
+      updatedItem({ ...selectedItem, name: valueInputUpdate });
+    }
   };
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -53,6 +71,73 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
       setIsShow(false);
       setValueInput('');
     }
+  };
+  const handleKeyPressUpdate = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setValueInputUpdate('');
+      setIsEdit(false);
+      handleSubmitUpdate();
+    }
+  };
+
+  const dropdownStatusNext = (title: string | null | undefined) => {
+    let dropdownName = '';
+    const dropdownIndex = dropdownTitles.indexOf(title);
+
+    if (dropdownIndex !== -1 && dropdownIndex < dropdownTitles.length - 1) {
+      dropdownName = dropdownTitles[dropdownIndex + 1];
+    } else {
+      dropdownName = '';
+    }
+
+    return dropdownName;
+  };
+
+  const titleFormatted = (title: string | null | undefined) => {
+    if (title) {
+      if (title.split('_')[1]) {
+        return title
+          .split('_')
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ');
+      } else {
+        return title.charAt(0).toUpperCase() + title.slice(1);
+      }
+    }
+  };
+
+  const getDropdowns = (item: DataProps) => {
+    let dropdownArr: any[] = [];
+
+    if (dropdownStatusNext(item.status)) {
+      dropdownArr.push({
+        name: titleFormatted(dropdownStatusNext(item.status)),
+        click: () =>
+          dropdownNextClick &&
+          dropdownNextClick(item, dropdownStatusNext(item.status)),
+      });
+    } else {
+      dropdownArr = [];
+    }
+
+    const updateAndRemove = [
+      {
+        name: 'Update',
+        click: () => {
+          setIsEdit(true);
+          setSelectedItem(item);
+          setValueInputUpdate(item.name);
+        },
+      },
+      {
+        name: 'Delete',
+        click: () => {
+          dropdownDeleteClick && dropdownDeleteClick(item);
+        },
+      },
+    ];
+
+    return [...dropdownArr, ...updateAndRemove];
   };
 
   return (
@@ -69,12 +154,18 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
             value={valueInput}
             onChange={setValueInput}
             onKeyUp={handleKeyPress}
+            maxWidth
           />
         </div>
       )}
-      {isAddCardDetails && (
-        <div className="styled-card-detail-list-cardDetails">
-          <CardDetails label={data[0].name} dropdown={dropdown} color="white" />
+      {isEdit && (
+        <div className="styled-card-detail-list-input">
+          <Input
+            value={valueInputUpdate}
+            onChange={setValueInputUpdate}
+            onKeyUp={handleKeyPressUpdate}
+            maxWidth
+          />
         </div>
       )}
       {data.length > 0 && (
@@ -83,7 +174,7 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
             <CardDetails
               key={item.id}
               label={item.name}
-              dropdown={dropdown}
+              dropdown={getDropdowns(item)}
               color={item.status === 'done' ? 'gray' : 'white'}
             />
           ))}

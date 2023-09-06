@@ -52,59 +52,30 @@ const Trello = () => {
     }
     return multiData;
   };
-
   const onClickDeleteCard = (item: DataProps) => {
-    // const updatedData = data.filter((item) => item.id !== selectedId);
-    // setData(updatedData);
+    const oldItemForDelete = data.filter((fi) => fi.id !== item.id);
+    setData(oldItemForDelete);
+  };
+  const onClickUpdatedCard = (item: DataProps) => {
+    const oldItemForDelete = data.filter((fi) => fi.id !== item.id);
+
+    setData([...oldItemForDelete, item]);
   };
 
-  const getDropdownOptions = (statusTitle: string, item: any) => {
-    if (statusTitle === 'Todo') {
-      return [
-        {
-          name: 'In Progress',
-          click: () => {},
-        },
-        {
-          name: 'Update',
-          click: () => {},
-        },
-        {
-          name: 'Delete',
-          click: () => {
-            onClickDeleteCard(item);
-          },
-        },
-      ];
-    } else if (statusTitle === 'In Progress') {
-      return [
-        {
-          name: 'Done',
-          click: () => {},
-        },
-        {
-          name: 'Update',
-          click: () => {},
-        },
-        {
-          name: 'Delete',
-          click: () => {},
-        },
-      ];
-    } else if (statusTitle === 'Done') {
-      return [
-        {
-          name: 'Update',
-          click: () => {},
-        },
-        {
-          name: 'Delete',
-          click: () => {},
-        },
-      ];
-    } else {
-      return [];
-    }
+  const addNewItemToCard = (item: DataProps) => {
+    setData([...data, item]);
+  };
+
+  const dropdownHandleNextTo = (item: DataProps, nextStatus: string) => {
+    const oldItemForDelete: any = data.filter((fi) => fi.id !== item.id);
+    const selectedItemForLifting: DataProps | undefined = data.find(
+      (fi) => fi.id === item.id
+    );
+
+    setData([
+      ...oldItemForDelete,
+      { ...selectedItemForLifting, status: nextStatus },
+    ]);
   };
 
   return (
@@ -113,12 +84,16 @@ const Trello = () => {
         {multipleData(data).map((item) => (
           <CardDetailsList
             addButton={item.title === 'Todo' ? true : false}
-            addInput={item.title === 'Todo' && 'In Progress' ? true : false}
+            addInput={item.title === 'Todo' ? true : false}
             key={item.id}
             label={item.title}
-            dropdown={getDropdownOptions(item.title, item)}
             data={item.data as DataProps[]}
             setData={setData}
+            dropdownTitles={onlyStatusAddInArr(data)}
+            dropdownNextClick={dropdownHandleNextTo}
+            dropdownDeleteClick={onClickDeleteCard}
+            updatedItem={onClickUpdatedCard}
+            addItem={addNewItemToCard}
           />
         ))}
       </div>
