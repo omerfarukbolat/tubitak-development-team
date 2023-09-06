@@ -11,7 +11,6 @@ export interface ModalProps {
 }
 
 const getComponent = (cmpnt: string, meta: any, closeModal: () => void) => {
-  console.log(closeModal);
   switch (cmpnt) {
     case 'home-new-create':
       return <HomeNewCreate meta={meta} closeModal={closeModal} />;

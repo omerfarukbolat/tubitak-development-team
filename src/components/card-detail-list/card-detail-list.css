@@ -6,19 +6,20 @@
   background-color: whitesmoke;
   border: 1px;
   border-radius: 5px;
-  padding: 10px;
   position: relative;
+  padding: 20px 30px;
 }
 
 .styled-card-detail-list-button {
   position: absolute;
   display: none;
+  width: 90px;
 }
 
 .styled-card-detail-list:hover .styled-card-detail-list-button {
   display: block;
   left: 200px;
-  top: 10px;
+  top: 8px;
 }
 
 .styled-card-detail-list-label {
@@ -28,13 +29,15 @@
   font-weight: 700;
   color: green;
   font-size: 1.5rem;
-  margin-top: 60px;
+  margin-top: 30px;
+  margin-bottom: 25px;
 }
 
 .styled-card-detail-list-input {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .styled-card-detail-list-cardDetails {
@@ -42,5 +45,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 10px;
+  padding-top: 0px;
+  gap: 10px;
 }

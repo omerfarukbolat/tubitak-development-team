@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from '../../components/container';
 import Input from '../../components/input';
 import './todo.css';
@@ -12,10 +12,8 @@ const Todo = () => {
   const [newTask, setNewTask] = useState('');
   const [apiData, setApiData] = useState(data.apiData || []);
   const [filteredData, setFilteredData] = useState(apiData);
-  const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState('');
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
-  const [dropdownData, setDropdownData] = useState([]);
 
   const tabData = data.tabData;
 
@@ -54,8 +52,6 @@ const Todo = () => {
     const updatedApiData = apiData.filter((task) => !task.isCompleted);
     setApiData(updatedApiData);
   };
-  
-
 
   const getDropdownData = (task: {
     id: number;
@@ -129,6 +125,7 @@ const Todo = () => {
           value={newTask}
           onChange={(newValue) => setNewTask(newValue)}
           onKeyDown={handleInputKeyDown}
+          maxWidth={true}
         />
 
         <div className="styled-todo-tabs">
@@ -141,7 +138,7 @@ const Todo = () => {
             onClick={() => handleClearAll()}
           />
         </div>
-        <div className='styled-todo-tabs-end'></div>
+        <div className="styled-todo-tabs-end"></div>
         {reversedData.map((task) =>
           editingTaskId === task.id ? (
             <div>
@@ -155,6 +152,8 @@ const Todo = () => {
                     cancelEdit();
                   }
                 }}
+                maxWidth={true}
+
               />
             </div>
           ) : (
@@ -165,8 +164,7 @@ const Todo = () => {
             />
           )
         )}
-                <div className='styled-todo-list-end'></div>
-
+        <div className="styled-todo-list-end"></div>
       </div>
     </Container>
   );
