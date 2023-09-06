@@ -31,7 +31,6 @@ export interface DataProps {
 const CardDetailsList: React.FC<CardDetailsListProps> = ({
   label,
   data,
-  setData,
   addInput = false,
   addButton = false,
   dropdownTitles = [],
@@ -155,11 +154,12 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
             value={valueInput}
             onChange={setValueInput}
             onKeyUp={handleKeyPress}
+            maxWidth
           />
         </div>
       )}
       {isEdit && (
-        <div>
+        <div className="styled-card-detail-list-input">
           <Input
             value={valueInputUpdate}
             onChange={setValueInputUpdate}

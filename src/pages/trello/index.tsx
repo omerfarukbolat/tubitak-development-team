@@ -84,7 +84,7 @@ const Trello = () => {
         {multipleData(data).map((item) => (
           <CardDetailsList
             addButton={item.title === 'Todo' ? true : false}
-            addInput={item.title === 'Todo' && 'In Progress' ? true : false}
+            addInput={item.title === 'Todo' ? true : false}
             key={item.id}
             label={item.title}
             data={item.data as DataProps[]}
