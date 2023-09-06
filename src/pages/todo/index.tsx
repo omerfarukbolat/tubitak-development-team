@@ -123,14 +123,15 @@ const Todo = () => {
   return (
     <Container>
       <div className="styled-todo">
-        <Input
-          placeholder="Add a new task"
-          value={newTask}
-          onChange={(newValue) => setNewTask(newValue)}
-          onKeyDown={handleInputKeyDown}
-          maxWidth={true}
-        />
-
+        <div className="styled-todo-input">
+          <Input
+            placeholder="Add a new task"
+            value={newTask}
+            onChange={(newValue) => setNewTask(newValue)}
+            onKeyDown={handleInputKeyDown}
+            maxWidth={true}
+          />
+        </div>
         <div className="styled-todo-tabs">
           <Tabs data={tabData} active={activeTab} setActive={setActiveTab} />
 
@@ -144,7 +145,7 @@ const Todo = () => {
         <div className="styled-todo-tabs-end"></div>
         {reversedData.map((task) =>
           editingTaskId === task.id ? (
-            <div>
+            <div className="styled-todo-input">
               <Input
                 value={editedTask}
                 onChange={(newValue) => setEditedTask(newValue)}
@@ -156,7 +157,6 @@ const Todo = () => {
                   }
                 }}
                 maxWidth={true}
-
               />
             </div>
           ) : (
@@ -165,7 +165,6 @@ const Todo = () => {
               data={[task]}
               dropdownData={getDropdownData(task)}
               onCheckboxChange={() => handleCheckboxChangeInTodo(task.id)}
-
             />
           )
         )}
