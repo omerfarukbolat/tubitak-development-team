@@ -3,10 +3,6 @@
   flex-direction: column;
 }
 
-.styled-input.maxWidth {
-  width: 100%;
-}
-
 .styled-input-label {
   padding: inherit;
   font-size: 14px;
