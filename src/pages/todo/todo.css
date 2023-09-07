@@ -12,11 +12,11 @@
   cursor: pointer;
 }
 
-.styled-tabs {
+.styled-todo .styled-tabs {
   margin-right: auto;
 }
 
-.styled-button {
+.styled-todo .styled-button {
   margin-left: auto;
 }
 
@@ -33,6 +33,6 @@
   padding-top: 20px;
 }
 
-.styled-todo-input{
+.styled-todo-input {
   padding: 10px;
 }
