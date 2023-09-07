@@ -1,10 +1,10 @@
-import { useDispatch } from 'react-redux';
 import Button from '../../components/button';
 import { openModal } from '../../store/reducers/modalReducer';
 import Container from '../../components/container';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 const Home = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <Container>

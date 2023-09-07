@@ -1,9 +1,10 @@
 import './modal.css';
 import { useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { closeModal } from '../store/reducers/modalReducer';
 import HomeNewCreate from './body/homeNewCreate';
 import useOnClickOutside from '../hooks/useOnClickOutside';
+import { useAppSelector } from '../hooks/useAppSelector';
+import { useAppDispatch } from '../hooks/useAppDispatch';
 
 export interface ModalProps {
   meta?: any;
@@ -21,19 +22,13 @@ const getComponent = (cmpnt: string, meta: any, closeModal: () => void) => {
 };
 
 const Modal = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const ref = useRef<HTMLDivElement | null>(null);
   useOnClickOutside(ref, () => handleCloseModal());
 
-  const component = useSelector(
-    (state: { modal: { component: string } }) => state.modal.component
-  );
-  const title = useSelector(
-    (state: { modal: { title: string } }) => state.modal.title
-  );
-  const meta = useSelector(
-    (state: { modal: { meta: any } }) => state.modal.meta
-  );
+  const component = useAppSelector((state) => state.modal.component);
+  const title = useAppSelector((state) => state.modal.title);
+  const meta = useAppSelector((state) => state.modal.meta);
 
   const handleCloseModal = () => {
     dispatch(closeModal());
