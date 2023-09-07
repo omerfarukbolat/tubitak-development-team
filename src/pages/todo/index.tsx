@@ -28,6 +28,7 @@ const Todo = () => {
       setNewTask('');
     }
   };
+
   useEffect(() => {
     const updateFilteredData = () => {
       let filteredTasks:
@@ -47,6 +48,7 @@ const Todo = () => {
 
     updateFilteredData();
   }, [activeTab, apiData]);
+
   const handleClearAll = () => {
     const updatedApiData = apiData.filter((task) => !task.isCompleted);
     setApiData(updatedApiData);
@@ -57,32 +59,27 @@ const Todo = () => {
     label: string;
     isCompleted: boolean;
   }) => {
+    const commonOptions = [
+      {
+        name: 'Update',
+        click: () => handleEditTask(task.id),
+      },
+      {
+        name: task.isCompleted ? 'Not Completed' : 'Completed',
+        click: () => handleToggleCompleted(task.id),
+      },
+    ];
+
     if (task.isCompleted) {
       return [
-        {
-          name: 'Update',
-          click: () => handleEditTask(task.id),
-        },
+        ...commonOptions,
         {
           name: 'Delete',
           click: () => handleDeleteTask(task.id),
         },
-        {
-          name: 'Not Completed',
-          click: () => handleToggleCompleted(task.id),
-        },
       ];
     } else {
-      return [
-        {
-          name: 'Update',
-          click: () => handleEditTask(task.id),
-        },
-        {
-          name: 'Completed',
-          click: () => handleToggleCompleted(task.id),
-        },
-      ];
+      return commonOptions;
     }
   };
 
@@ -90,6 +87,7 @@ const Todo = () => {
     const updatedApiData = apiData.filter((task) => task.id !== taskId);
     setApiData(updatedApiData);
   };
+
   const handleUpdateTask = (taskId: number) => {
     const updatedApiData = apiData.map((task) =>
       task.id === taskId ? { ...task, label: editedTask } : task
@@ -97,6 +95,7 @@ const Todo = () => {
     setApiData(updatedApiData);
     setEditingTaskId(null);
   };
+
   const handleEditTask = (taskId: number) => {
     setEditingTaskId(taskId);
     setEditedTask(apiData.find((task) => task.id === taskId)?.label || '');
@@ -106,6 +105,7 @@ const Todo = () => {
     setEditingTaskId(null);
     setEditedTask('');
   };
+
   const reversedData = filteredData.slice().reverse();
 
   const handleToggleCompleted = (taskId: number) => {
@@ -114,23 +114,26 @@ const Todo = () => {
     );
     setApiData(updatedApiData);
   };
+
   const handleCheckboxChangeInTodo = (taskId: number) => {
     const updatedApiData = apiData.map((task) =>
       task.id === taskId ? { ...task, isCompleted: !task.isCompleted } : task
     );
     setApiData(updatedApiData);
   };
+
   return (
     <Container>
       <div className="styled-todo">
-        <Input
-          placeholder="Add a new task"
-          value={newTask}
-          onChange={(newValue) => setNewTask(newValue)}
-          onKeyDown={handleInputKeyDown}
-          maxWidth={true}
-        />
-
+        <div className="styled-todo-input">
+          <Input
+            placeholder="Add a new task"
+            value={newTask}
+            onChange={(newValue) => setNewTask(newValue)}
+            onKeyDown={handleInputKeyDown}
+            maxWidth
+          />
+        </div>
         <div className="styled-todo-tabs">
           <Tabs data={tabData} active={activeTab} setActive={setActiveTab} />
 
@@ -144,7 +147,7 @@ const Todo = () => {
         <div className="styled-todo-tabs-end"></div>
         {reversedData.map((task) =>
           editingTaskId === task.id ? (
-            <div>
+            <div className="styled-todo-input">
               <Input
                 value={editedTask}
                 onChange={(newValue) => setEditedTask(newValue)}
@@ -155,8 +158,7 @@ const Todo = () => {
                     cancelEdit();
                   }
                 }}
-                maxWidth={true}
-
+                maxWidth
               />
             </div>
           ) : (
@@ -165,7 +167,6 @@ const Todo = () => {
               data={[task]}
               dropdownData={getDropdownData(task)}
               onCheckboxChange={() => handleCheckboxChangeInTodo(task.id)}
-
             />
           )
         )}
