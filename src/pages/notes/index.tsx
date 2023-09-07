@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import AddNote, { NoteItemProps } from '../../components/addNote';
 import Container from '../../components/container';
@@ -48,9 +47,7 @@ const Notes: React.FC = () => {
   return (
     <Container>
       <div className="styled-note-list">
-        <div>
-          <AddNote onAddNote={handleAddNote} />
-        </div>
+        <AddNote onAddNote={handleAddNote} />
         {notes.map((note) => (
           <Note
             key={note.id}
@@ -65,4 +62,3 @@ const Notes: React.FC = () => {
 };
 
 export default Notes;
-

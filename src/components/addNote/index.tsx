@@ -40,26 +40,25 @@ const AddNote: React.FC<AddNoteButtonProps> = ({ onAddNote }) => {
       {showForm ? (
         <div className="styled-addNote-inputs">
           <Input label="Title" maxWidth value={title} onChange={setTitle} />
-
           <TextArea
             label="Description"
             value={description}
             onChange={setDescription}
             maxWidth
           />
-
           <div className="styled-addNote-buttons">
             <Button onClick={handleAddNote} label="Add Note" />
             <Button onClick={() => setShowForm(false)} label="Cancel" />
           </div>
         </div>
       ) : (
-        <div className="styled-addNotes">
-          <button className="addNew" onClick={() => setShowForm(true)}>
-            <span className="styled-addNotes-icon" />
-            <label className="styled-addNotes-label">Add New Note</label>
-          </button>
-        </div>
+        <button
+          className="styled-addNote-addNew"
+          onClick={() => setShowForm(true)}
+        >
+          <span className="styled-addNote-addNew-icon" />
+          <label className="styled-addNote-addNew-label">Add New Note</label>
+        </button>
       )}
     </div>
   );

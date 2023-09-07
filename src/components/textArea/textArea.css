@@ -1,16 +1,12 @@
 .styled-textArea {
   display: inline-flex;
   flex-direction: column;
-  /* padding: 12px; */
   width: 250px;
-
 }
-
 
 .styled-textArea.maxWidth {
   width: 100%;
 }
-
 
 .styled-textArea-label {
   font-size: 14px;
@@ -20,11 +16,12 @@
 }
 
 .styled-textArea-form {
-  border: solid black 0.1rem;
+  border: solid #9f9090 0.1rem;
   border-radius: 0.2rem;
   font-size: 16px;
   color: #141414;
-  padding-bottom: 10px;
   width: 100%;
   resize: none;
+  outline: none;
+  padding: 5px;
 }
