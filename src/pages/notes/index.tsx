@@ -29,7 +29,6 @@ const Notes: React.FC = () => {
       ...prevNotes,
       { ...newNote, id: new Date().getTime() },
     ]);
-    console.log(newNote);
   };
 
   const handleEditNote = (id: number, updatedData: Partial<NoteItemProps>) => {
