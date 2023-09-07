@@ -28,6 +28,7 @@ const Todo = () => {
       setNewTask('');
     }
   };
+
   useEffect(() => {
     const updateFilteredData = () => {
       let filteredTasks:
@@ -47,6 +48,7 @@ const Todo = () => {
 
     updateFilteredData();
   }, [activeTab, apiData]);
+
   const handleClearAll = () => {
     const updatedApiData = apiData.filter((task) => !task.isCompleted);
     setApiData(updatedApiData);
@@ -80,10 +82,12 @@ const Todo = () => {
       return commonOptions;
     }
   };
+
   const handleDeleteTask = (taskId: number) => {
     const updatedApiData = apiData.filter((task) => task.id !== taskId);
     setApiData(updatedApiData);
   };
+
   const handleUpdateTask = (taskId: number) => {
     const updatedApiData = apiData.map((task) =>
       task.id === taskId ? { ...task, label: editedTask } : task
@@ -91,6 +95,7 @@ const Todo = () => {
     setApiData(updatedApiData);
     setEditingTaskId(null);
   };
+
   const handleEditTask = (taskId: number) => {
     setEditingTaskId(taskId);
     setEditedTask(apiData.find((task) => task.id === taskId)?.label || '');
@@ -100,6 +105,7 @@ const Todo = () => {
     setEditingTaskId(null);
     setEditedTask('');
   };
+
   const reversedData = filteredData.slice().reverse();
 
   const handleToggleCompleted = (taskId: number) => {
@@ -108,12 +114,14 @@ const Todo = () => {
     );
     setApiData(updatedApiData);
   };
+
   const handleCheckboxChangeInTodo = (taskId: number) => {
     const updatedApiData = apiData.map((task) =>
       task.id === taskId ? { ...task, isCompleted: !task.isCompleted } : task
     );
     setApiData(updatedApiData);
   };
+
   return (
     <Container>
       <div className="styled-todo">
@@ -123,7 +131,7 @@ const Todo = () => {
             value={newTask}
             onChange={(newValue) => setNewTask(newValue)}
             onKeyDown={handleInputKeyDown}
-            maxWidth={true}
+            maxWidth
           />
         </div>
         <div className="styled-todo-tabs">
@@ -150,7 +158,7 @@ const Todo = () => {
                     cancelEdit();
                   }
                 }}
-                maxWidth={true}
+                maxWidth
               />
             </div>
           ) : (
