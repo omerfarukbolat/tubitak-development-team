@@ -7,6 +7,8 @@
   padding: inherit;
   font-size: 14px;
   color: #000000;
+  font-weight: bold;
+  margin-bottom: 2px;
 }
 
 .styled-input-form {
