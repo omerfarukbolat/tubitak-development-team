@@ -1,7 +1,6 @@
 /* note.css */
 
 .styled-note {
-  border: 1px solid #ccc;
   border-radius: 10px;
   position: relative;
   height: 320px;
@@ -10,6 +9,7 @@
   display: inline-flex;
   flex-direction: column;
   padding: 20px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
 .styled-note-top {
