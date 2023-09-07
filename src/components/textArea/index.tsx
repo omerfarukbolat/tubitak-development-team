@@ -27,7 +27,7 @@ const TextArea: React.FC<TextAreaProps> = ({
 
   return (
     <div className={`styled-textArea ${maxWidth ? 'maxWidth' : ''}`}>
-      <label className="styled-textArea-label">{label}</label>
+      {label && <label className="styled-textArea-label">{label}</label>}
       <textarea
         className="styled-textArea-form"
         style={{ height }}

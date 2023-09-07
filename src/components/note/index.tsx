@@ -38,8 +38,6 @@ const Note: React.FC<NoteProps> = ({ data, onEditNote, onDeleteNote }) => {
       onEditNote(id, { title, description });
     }
     setIsEditMode(!isEditMode);
-
-    console.log(title, description);
   };
 
   const handleCancelEditClick = () => {
@@ -50,63 +48,53 @@ const Note: React.FC<NoteProps> = ({ data, onEditNote, onDeleteNote }) => {
 
   const handleDeleteNoteClick = () => {
     onDeleteNote(id);
-
-    console.log('Delete note with id:', id);
   };
 
   return (
-    <div className="styled-note-container">
-      <div className="styled-note-content">
-        <div className="styled-note-title">
-          {isEditMode ? (
-            <>
+    <div className="styled-note">
+      <div className="styled-note-top">
+        {isEditMode ? (
+          <>
+            <button
+              className="styled-note-top-close-button"
+              onClick={handleCancelEditClick}
+            >
+              X
+            </button>
+            <div className="styled-note-top-between">
               <Input
                 value={title}
                 onChange={(e) => setTitle(e)}
                 label="Title"
                 maxWidth
               />
+              <TextArea
+                value={description}
+                onChange={(e) => setDescription(e)}
+                label="Description"
+                maxWidth
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="styled-note-top-title">{title}</div>
+            <div className="styled-note-top-description">{description}</div>
+          </>
+        )}
+      </div>
 
-              <div>
-                <button
-                  className="styled-close-button"
-                  onClick={handleCancelEditClick}
-                >
-                  X
-                </button>
-              </div>
-            </>
-          ) : (
-            title
-          )}
-        </div>
-        <div className="styled-note-description">
-          {isEditMode ? (
-            <TextArea
-              value={description}
-              onChange={(e) => setDescription(e)}
-              label="Description"
-              maxWidth
-            />
-          ) : (
-            description
-          )}
-        </div>
-
-        {/* <hr className="hr" /> */}
-
-        <div className="styled-note-dropdown">
-          <Dropdown
-            data={[
-              {
-                name: isEditMode ? 'Save' : 'Edit',
-                click: handleEditNoteClick,
-              },
-              { name: 'Delete', click: handleDeleteNoteClick },
-            ]}
-          />
-        </div>
-        <div className="styled-note-date">{formattedDate}</div>
+      <div className="styled-note-bottom">
+        <div className="styled-note-bottom-date">{formattedDate}</div>
+        <Dropdown
+          data={[
+            {
+              name: isEditMode ? 'Save' : 'Edit',
+              click: handleEditNoteClick,
+            },
+            { name: 'Delete', click: handleDeleteNoteClick },
+          ]}
+        />
       </div>
     </div>
   );

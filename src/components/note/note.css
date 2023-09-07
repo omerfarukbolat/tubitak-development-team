@@ -1,76 +1,57 @@
-
 /* note.css */
 
-.styled-note-container {
-  border: 1px solid #ccc;
-  border-radius: 2%;
+.styled-note {
+  border-radius: 10px;
   position: relative;
-  margin: 10px;
-  height: 302px;
-  width: 300px;
+  height: 320px;
+  width: 320px;
   background-color: white;
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
+.styled-note-top {
+  flex: 1;
+}
 
-.styled-note-content {
+.styled-note-top-between {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   height: 100%;
-  position: relative;
-} 
-
-.styled-note-title {
-  margin: 0;
-  padding: 0;
-  font-size: 1.5rem;
-  margin-left: 20px;
-  margin-right: 20px;
-  text-align: left;
-  overflow-wrap: break-word;
 }
 
-.styled-note-description {
-  margin: 0 20px;
+.styled-note-top-title {
+  font-size: 1.5rem;
+  overflow-wrap: break-word;
+  margin-bottom: 5px;
+}
+
+.styled-note-top-description {
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
-.styled-note-date {
-  font-size: 0.9rem;
-  padding: 10px;
-  color: #777;
-  position: absolute;
-  bottom: 1%;
-  left: 10px;
+.styled-note-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
-.styled-note-dropdown {
+.styled-note-bottom-date {
   font-size: 0.9rem;
   color: #777;
-  position: absolute;
-  bottom: 2%;
-  right: 15px;
 }
 
-/*
-.hr {
-  width: 85%;
-  border: none;
-  border-top: 1px solid #ccc;
-  position: relative;
-  margin: 10px 0;
-  top: 55%;
-  left: 20px;
-
-}
-*/
-
-.styled-close-button {
+.styled-note-top-close-button {
   font-size: 0.9rem;
   border: none;
   color: #777;
   position: absolute;
   top: 6px;
   right: 10px;
+  cursor: pointer;
 }
