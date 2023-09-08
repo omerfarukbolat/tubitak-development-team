@@ -1,37 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './index.css';
+import Button from '../../components/button';
 
 interface SelectButtonProps {
   label: string;
-  data: { label: string; isActive: boolean }[];
+  data: string[];
+  isActive: string | null;
+  setIsActive: (data: string | null) => void;
 }
 
 const SelectButton: React.FC<SelectButtonProps> = ({
   label,
   data,
+  isActive,
+  setIsActive,
 }: SelectButtonProps) => {
-  const [buttonData, setButtonData] = useState(data);
-
-  const handleButtonClick = (index: number) => {
-    const updatedData = buttonData.map((item, i) => ({
-      ...item,
-      isActive: i === index, 
-    }));
-    setButtonData(updatedData);
-  };
-
   return (
-    <div className="styled-select-button-container">
+    <div className="styled-select-button">
       <label>{label}</label>
       <div className="styled-select-button-list">
-        {buttonData.map((item, index) => (
-          <button
+        {data.map((item, index) => (
+          <Button
             key={index}
-            className={`styled-select-button${item.isActive ? ' active' : ''}`}
-            onClick={() => handleButtonClick(index)}
-          >
-            {item.label}
-          </button>
+            label={item}
+            colour={item === isActive ? 'white' : 'black'}
+            backgroundColour={item === isActive ? 'blue' : 'grey'}
+            onClick={() => setIsActive(item === isActive ? null : item)}
+          />
         ))}
       </div>
     </div>
