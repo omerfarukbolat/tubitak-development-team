@@ -3,6 +3,8 @@ import CardDetailsList, { DataProps } from '../../components/card-detail-list';
 import Container from '../../components/container';
 import './trello.css';
 import dummyDatas from '../../json/dummyTrello.json';
+import Input from '../../components/input';
+import TextArea from '../../components/textArea';
 
 const Trello = () => {
   const [data, setData] = useState<DataProps[]>([]);

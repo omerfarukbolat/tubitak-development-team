@@ -21,6 +21,14 @@
   width: 100%;
 }
 
+.styled-input-form.backgroundColor-white {
+  background-color: white;
+}
+
+.styled-input-form.backgroundColor-gray {
+  background-color: rgb(233, 233, 233);
+}
+
 .styled-input-form::placeholder {
   color: #c2c2c2;
 }

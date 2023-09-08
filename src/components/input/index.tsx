@@ -11,6 +11,7 @@ interface InputProps {
   onChange: (newValue: string) => void;
   onKeyDown?: KeyboardEventHandler<HTMLInputElement> | undefined;
   onKeyUp?: (event: KeyboardEvent<HTMLInputElement>) => void;
+  backgroundColor?: 'white' | 'gray';
 }
 
 const Input: React.FC<InputProps> = ({
@@ -23,6 +24,7 @@ const Input: React.FC<InputProps> = ({
   onKeyDown,
   onChange,
   onKeyUp,
+  backgroundColor = 'white',
 }) => {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
@@ -33,7 +35,7 @@ const Input: React.FC<InputProps> = ({
     <div style={{ width: maxWidth ? '100%' : width }} className="styled-input">
       {label && <label className="styled-input-label">{label}</label>}
       <input
-        className="styled-input-form"
+        className={`styled-input-form backgroundColor-${backgroundColor}`}
         placeholder={placeholder}
         value={value}
         name={name}

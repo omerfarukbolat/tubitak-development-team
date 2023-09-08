@@ -25,3 +25,11 @@
   outline: none;
   padding: 5px;
 }
+
+.styled-textArea-form.backgroundColor-white {
+  background-color: white;
+}
+
+.styled-textArea-form.backgroundColor-gray {
+  background-color: rgb(233, 233, 233);
+}
