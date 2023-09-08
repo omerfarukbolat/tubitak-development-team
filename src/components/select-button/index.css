@@ -1,14 +1,26 @@
-.styled-select-button {
+.styled-select-button, .styled-select-button.active {
     outline: none;
     padding-inline: 10px;
     border-radius: 5px;
     font-weight: 600;
     border: none;
-    cursor:pointer;
+    cursor: pointer;
     height: 30px;
     line-height: 15px;
     margin-right: 5px;
+  }
+  
+  .styled-select-button {
+    background-color: #dcdcdc;
+    color: black;
+  }
+  
+  .styled-select-button.active {
     background-color: #527cf8;
     color: white;
-
+  }
+  
+  .styled-select-button-container label {
+    font-size: 14px;
+    font-weight: bold;
   }
