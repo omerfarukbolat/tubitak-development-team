@@ -1,0 +1,14 @@
+.styled-select-button {
+    outline: none;
+    padding-inline: 10px;
+    border-radius: 5px;
+    font-weight: 600;
+    border: none;
+    cursor:pointer;
+    height: 30px;
+    line-height: 15px;
+    margin-right: 5px;
+    background-color: #527cf8;
+    color: white;
+
+  }
