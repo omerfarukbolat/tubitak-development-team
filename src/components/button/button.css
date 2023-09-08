@@ -9,8 +9,16 @@
   line-height: 15px;
 }
 
+.styled-button.maxWidth {
+  width: 100%;
+}
+
 .styled-button.colour-white {
   color: white;
+}
+
+.styled-button.colour-blue {
+  background-color: #527cf8;
 }
 
 .styled-button.colour-black {
@@ -19,6 +27,10 @@
 
 .styled-button.backgroundColour-blue {
   background-color: #527cf8;
+}
+
+.styled-button.backgroundColour-gray {
+  background-color: rgb(233,233,233);
 }
 
 .styled-button.backgroundColour-red {
