@@ -1,0 +1,10 @@
+  .styled-select-button-label {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .styled-select-button-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
