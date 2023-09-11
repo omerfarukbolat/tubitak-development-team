@@ -6,7 +6,7 @@ interface SelectButtonProps {
   label: string;
   data: string[];
   isActive: string | null;
-  setIsActive: (isActive:string) => void;
+  setIsActive: (isActive: string) => void;
 }
 
 const SelectButton: React.FC<SelectButtonProps> = ({
@@ -17,7 +17,7 @@ const SelectButton: React.FC<SelectButtonProps> = ({
 }: SelectButtonProps) => {
   return (
     <div className="styled-select-button">
-      <label>{label}</label>
+      <label className="styled-select-button-label">{label}</label>
       <div className="styled-select-button-list">
         {data.map((item, index) => (
           <Button
