@@ -1,9 +1,11 @@
-.styled-select-button Button {
-    margin-right: 5px;
-    flex-wrap:wrap ;
-  }
   
   .styled-select-button label {
     font-size: 14px;
     font-weight: bold;
+  }
+
+  .styled-select-button-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
   }
