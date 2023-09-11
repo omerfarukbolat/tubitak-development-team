@@ -6,7 +6,7 @@ interface SelectButtonProps {
   label: string;
   data: string[];
   isActive: string | null;
-  setIsActive: (data: string | null) => void;
+  setIsActive: (isActive:string) => void;
 }
 
 const SelectButton: React.FC<SelectButtonProps> = ({
