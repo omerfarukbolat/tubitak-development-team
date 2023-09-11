@@ -1,5 +1,6 @@
 .styled-select-button Button {
     margin-right: 5px;
+    flex-wrap:wrap ;
   }
   
   .styled-select-button label {
