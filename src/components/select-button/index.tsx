@@ -24,7 +24,7 @@ const SelectButton: React.FC<SelectButtonProps> = ({
             key={index}
             label={item}
             colour={item === isActive ? 'white' : 'black'}
-            backgroundColour={item === isActive ? 'blue' : 'grey'}
+            backgroundColour={item === isActive ? 'blue' : 'gray'}
             onClick={() => setIsActive(item)}
           />
         ))}
