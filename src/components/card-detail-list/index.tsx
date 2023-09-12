@@ -144,7 +144,11 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
     <div className="styled-card-detail-list">
       {addButton && (
         <div className="styled-card-detail-list-button">
-          <Button label="Add Card" onClick={showInput} />
+          <Button
+            label="Add Card"
+            onClick={showInput}
+            backgroundColour="blue"
+          />
         </div>
       )}
       <div className="styled-card-detail-list-label">{label}</div>

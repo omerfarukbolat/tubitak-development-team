@@ -5,6 +5,7 @@ import HomeNewCreate from './body/homeNewCreate';
 import useOnClickOutside from '../hooks/useOnClickOutside';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
+import UpdateCard from './body/updateCard';
 
 export interface ModalProps {
   meta?: any;
@@ -17,6 +18,9 @@ const getComponent = (cmpnt: string, meta: any, closeModal: () => void) => {
       return <HomeNewCreate meta={meta} closeModal={closeModal} />;
 
     default:
+    case 'update-card':
+      return <UpdateCard meta={meta} closeModal={closeModal} />;
+
       return;
   }
 };
