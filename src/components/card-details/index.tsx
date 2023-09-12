@@ -6,19 +6,21 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 interface CardDetailsProps {
   label?: string;
-  dropdown: DropdownProps[];
+  // dropdown: DropdownProps[];
   color?: 'white' | 'gray';
+  status?: string;
 }
 
-interface DropdownProps {
-  name: string;
-  click: () => void;
-}
+// interface DropdownProps {
+//   name: string;
+//   click: () => void;
+// }
 
 const CardDetails: React.FC<CardDetailsProps> = ({
   label,
   // dropdown,
   color = 'white',
+  status,
 }) => {
   const dispatch = useAppDispatch();
   return (
@@ -29,6 +31,7 @@ const CardDetails: React.FC<CardDetailsProps> = ({
           openModal({
             component: 'update-card',
             title: 'Update Card',
+            meta: { name: label, status },
           })
         )
       }

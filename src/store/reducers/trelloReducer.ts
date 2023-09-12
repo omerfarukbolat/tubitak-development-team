@@ -1,29 +1,44 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+interface CardDataProps {
+  id: number;
+  name: string;
+}
+
 interface DataProps {
-    id: number;
-    name: string;
-    status: string;
+  id: number;
+  title: string;
+  data: CardDataProps[];
 }
 
 interface TrelloState {
-    data: DataProps[];
+  data: DataProps[];
+  didFetched: boolean;
 }
 
 const initialState: TrelloState = {
-    data: [],
+  data: [],
+  didFetched: false,
 };
 
 const trelloSlice = createSlice({
-    name: 'trello',
-    initialState,
-    reducers: {
-        trelloFetch: (state, action: PayloadAction<DataProps[]>) => {
-            state.data = action.payload;
-        },
+  name: 'trello',
+  initialState,
+  reducers: {
+    setTrelloFetch: (state, action: PayloadAction<DataProps[]>) => {
+      state.data = action.payload;
+      state.didFetched = true;
     },
+    setAddTrelloTitle: (state, action: PayloadAction<string>) => {
+      state.data = [
+        ...state.data,
+        { id: new Date().getTime(), title: action.payload, data: [] },
+      ];
+    },
+    setUpdateTrelloCard: (state, action: PayloadAction<DataProps[]>) => {},
+  },
 });
 
-export const { trelloFetch } = trelloSlice.actions;
+export const { setTrelloFetch, setAddTrelloTitle } = trelloSlice.actions;
 
 export default trelloSlice.reducer;

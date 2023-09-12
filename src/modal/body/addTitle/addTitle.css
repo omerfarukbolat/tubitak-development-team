@@ -1,0 +1,5 @@
+.styled-add-title-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}

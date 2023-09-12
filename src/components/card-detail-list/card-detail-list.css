@@ -8,6 +8,7 @@
   border-radius: 5px;
   position: relative;
   padding: 20px 30px;
+  justify-content: space-between;
 }
 
 .styled-card-detail-list-button {

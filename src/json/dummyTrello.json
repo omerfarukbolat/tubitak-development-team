@@ -1,52 +1,44 @@
 [
   {
     "id": 1,
-    "name": "Buy medicines",
-    "status": "todo"
+    "title": "Todo",
+    "data": [
+      {
+        "id": 1,
+        "name": "Buy medicines"
+      },
+      {
+        "id": 2,
+        "name": "Buy alcohol"
+      }
+    ]
   },
   {
     "id": 2,
-    "name": "Go to the dentist",
-    "status": "todo"
+    "title": "In Progress",
+    "data": [
+      {
+        "id": 1,
+        "name": "Go to the school"
+      },
+      {
+        "id": 2,
+        "name": "Buy shoes"
+      }
+    ]
   },
   {
     "id": 3,
-    "name": "Go to the shopping",
-    "status": "todo"
-  },
-  {
-    "id": 4,
-    "name": "Grandpa birtday",
-    "status": "in_progress"
-  },
-  {
-    "id": 5,
-    "name": "Buy the suitcase",
-    "status": "in_progress"
-  },
-  {
-    "id": 6,
-    "name": "Buy the motocycle",
-    "status": "in_progress"
-  },
-  {
-    "id": 7,
-    "name": "Mobile Phone",
-    "status": "done"
-  },
-  {
-    "id": 8,
-    "name": "Buy the Car",
-    "status": "done"
-  },
-  {
-    "id": 9,
-    "name": "Call Ömer",
-    "status": "done"
-  },
-  {
-    "id": 10,
-    "name": "Update App content",
-    "status": "done"
+    "title": "Done",
+    "data": [
+      {
+        "id": 1,
+        "name": "Homework"
+      },
+      {
+        "id": 2,
+        "name": "Omer harika öğretmen"
+      }
+    ]
   }
 ]

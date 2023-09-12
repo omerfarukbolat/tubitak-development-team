@@ -6,6 +6,8 @@ import useOnClickOutside from '../hooks/useOnClickOutside';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import UpdateCard from './body/updateCard';
+import AddCard from './body/addCard';
+import AddTitle from './body/addTitle';
 
 export interface ModalProps {
   meta?: any;
@@ -21,10 +23,15 @@ const getComponent = (cmpnt: string, meta: any, closeModal: () => void) => {
     case 'update-card':
       return <UpdateCard meta={meta} closeModal={closeModal} />;
 
+    case 'add-title':
+      return <AddTitle closeModal={closeModal} />;
+
+    case 'add-card':
+      return <AddCard closeModal={closeModal} />;
+
       return;
   }
 };
-
 const Modal = () => {
   const dispatch = useAppDispatch();
   const ref = useRef<HTMLDivElement | null>(null);
