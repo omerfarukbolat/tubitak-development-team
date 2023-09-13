@@ -6,6 +6,8 @@ import Tabs from '../../components/tabs';
 import Button from '../../components/button';
 import CheckboxList from '../../components/ckeckbox-list';
 import data from '../../api/dummy_todo.json';
+import { openModal } from '../../store/reducers/modalReducer';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 const Todo = () => {
   const [activeTab, setActiveTab] = useState('all');
@@ -14,6 +16,7 @@ const Todo = () => {
   const [filteredData, setFilteredData] = useState(apiData);
   const [editedTask, setEditedTask] = useState('');
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
+  const dispatch = useAppDispatch();
 
   const tabData = data.tabData;
 
@@ -97,8 +100,15 @@ const Todo = () => {
   };
 
   const handleEditTask = (taskId: number) => {
-    setEditingTaskId(taskId);
-    setEditedTask(apiData.find((task) => task.id === taskId)?.label || '');
+    // setEditingTaskId(taskId);
+    // setEditedTask(apiData.find((task) => task.id === taskId)?.label || '');
+      dispatch(
+        openModal({
+          component: 'todo-update',
+          title: 'Update Todo',
+        })
+      )
+    
   };
 
   const cancelEdit = () => {
