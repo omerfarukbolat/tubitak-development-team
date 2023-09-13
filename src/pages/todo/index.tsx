@@ -8,15 +8,25 @@ import CheckboxList from '../../components/ckeckbox-list';
 import data from '../../api/dummy_todo.json';
 import { openModal } from '../../store/reducers/modalReducer';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+import {
+  setAddTodo,
+  setRemoveTodo,
+  setRemoveAllTodo,
+  setToggleCompleteTodo,
+  setActiveTab,
+} from '../../store/reducers/todoReducer';
+import { RootState } from '../../store';
+import { useSelector } from 'react-redux';
 
 const Todo = () => {
-  const [activeTab, setActiveTab] = useState('all');
   const [newTask, setNewTask] = useState('');
-  const [apiData, setApiData] = useState(data.apiData || []);
-  const [filteredData, setFilteredData] = useState(apiData);
-  const [editedTask, setEditedTask] = useState('');
-  const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
+  const [filteredData, setFilteredData] = useState<{ id: number; label: string; isCompleted: boolean }[]>([]);
   const dispatch = useAppDispatch();
+  const todoData = useSelector((state: RootState) => state.todo.data);
+  const activeTab = useSelector((state: RootState) => state.todo.activeTab);
+  const editingTaskId = useSelector(
+    (state: RootState) => state.todo.editingTaskId
+  );
 
   const tabData = data.tabData;
 
@@ -27,11 +37,10 @@ const Todo = () => {
         label: newTask,
         isCompleted: false,
       };
-      setApiData([...apiData, newTaskItem]);
+      dispatch(setAddTodo(newTaskItem));
       setNewTask('');
     }
   };
-
   useEffect(() => {
     const updateFilteredData = () => {
       let filteredTasks:
@@ -39,22 +48,21 @@ const Todo = () => {
         | undefined;
 
       if (activeTab === 'completed') {
-        filteredTasks = apiData.filter((task) => task.isCompleted === true);
+        filteredTasks = todoData.filter((task) => task.isCompleted === true);
       } else if (activeTab === 'pending') {
-        filteredTasks = apiData.filter((task) => task.isCompleted === false);
+        filteredTasks = todoData.filter((task) => task.isCompleted === false);
       } else if (activeTab === 'all') {
-        filteredTasks = apiData;
+        filteredTasks = todoData;
       }
 
       setFilteredData(filteredTasks || []);
     };
 
     updateFilteredData();
-  }, [activeTab, apiData]);
+  }, [activeTab, todoData]);
 
   const handleClearAll = () => {
-    const updatedApiData = apiData.filter((task) => !task.isCompleted);
-    setApiData(updatedApiData);
+    dispatch(setRemoveAllTodo());
   };
 
   const getDropdownData = (task: {
@@ -87,51 +95,35 @@ const Todo = () => {
   };
 
   const handleDeleteTask = (taskId: number) => {
-    const updatedApiData = apiData.filter((task) => task.id !== taskId);
-    setApiData(updatedApiData);
+    dispatch(setRemoveTodo(taskId));
   };
 
-  const handleUpdateTask = (taskId: number) => {
-    const updatedApiData = apiData.map((task) =>
-      task.id === taskId ? { ...task, label: editedTask } : task
-    );
-    setApiData(updatedApiData);
-    setEditingTaskId(null);
-  };
 
   const handleEditTask = (taskId: number) => {
     // setEditingTaskId(taskId);
     // setEditedTask(apiData.find((task) => task.id === taskId)?.label || '');
-      dispatch(
-        openModal({
-          component: 'todo-update',
-          title: 'Update Todo',
-        })
-      )
-    
+    dispatch(
+      openModal({
+        component: 'todo-update',
+        title: 'Update Todo',
+      })
+    );
   };
 
-  const cancelEdit = () => {
-    setEditingTaskId(null);
-    setEditedTask('');
-  };
 
   const reversedData = filteredData.slice().reverse();
 
   const handleToggleCompleted = (taskId: number) => {
-    const updatedApiData = apiData.map((task) =>
-      task.id === taskId ? { ...task, isCompleted: !task.isCompleted } : task
-    );
-    setApiData(updatedApiData);
+    dispatch(setToggleCompleteTodo(taskId));
   };
 
   const handleCheckboxChangeInTodo = (taskId: number) => {
-    const updatedApiData = apiData.map((task) =>
-      task.id === taskId ? { ...task, isCompleted: !task.isCompleted } : task
-    );
-    setApiData(updatedApiData);
-  };
+    dispatch(setToggleCompleteTodo(taskId));
 
+  };
+  const setActive = (tab: string) => {
+    dispatch(setActiveTab(tab)); 
+  };
   return (
     <Container>
       <div className="styled-todo">
@@ -145,7 +137,7 @@ const Todo = () => {
           />
         </div>
         <div className="styled-todo-tabs">
-          <Tabs data={tabData} active={activeTab} setActive={setActiveTab} />
+        <Tabs data={tabData} active={activeTab} setActive={setActive} />
 
           <Button
             label="Clear All"
@@ -158,18 +150,7 @@ const Todo = () => {
         {reversedData.map((task) =>
           editingTaskId === task.id ? (
             <div className="styled-todo-input">
-              <Input
-                value={editedTask}
-                onChange={(newValue) => setEditedTask(newValue)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    handleUpdateTask(task.id);
-                  } else if (e.key === 'Escape') {
-                    cancelEdit();
-                  }
-                }}
-                maxWidth
-              />
+
             </div>
           ) : (
             <CheckboxList
