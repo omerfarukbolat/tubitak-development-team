@@ -34,8 +34,8 @@ const Modal = () => {
     dispatch(closeModal());
   };
 
-  return (
-    <div className={`styled-modal ${component ? 'open' : 'close'}`}>
+  return component ? (
+    <div className="styled-modal">
       <div ref={ref} className="styled-modal-card">
         <div
           className="styled-modal-card-close"
@@ -49,6 +49,8 @@ const Modal = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <></>
   );
 };
 
