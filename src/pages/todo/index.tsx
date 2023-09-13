@@ -20,15 +20,15 @@ import { useSelector } from 'react-redux';
 
 const Todo = () => {
   const [newTask, setNewTask] = useState('');
-  const [filteredData, setFilteredData] = useState<{ id: number; label: string; isCompleted: boolean }[]>([]);
+  const [filteredData, setFilteredData] = useState<
+    { id: number; label: string; isCompleted: boolean }[]
+  >([]);
   const dispatch = useAppDispatch();
   const todoData = useSelector((state: RootState) => state.todo.data);
   const activeTab = useSelector((state: RootState) => state.todo.activeTab);
-  const editingTaskId = useSelector(
-    (state: RootState) => state.todo.editingTaskId
-  );
 
   const tabData = data.tabData;
+  const reversedData = filteredData.slice().reverse();
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && newTask.trim() !== '') {
@@ -98,20 +98,23 @@ const Todo = () => {
     dispatch(setRemoveTodo(taskId));
   };
 
-
   const handleEditTask = (taskId: number) => {
-    // setEditingTaskId(taskId);
-    // setEditedTask(apiData.find((task) => task.id === taskId)?.label || '');
-    dispatch(
-      openModal({
-        component: 'todo-update',
-        title: 'Update Todo',
-      })
-    );
+    const taskToEdit = todoData.find((task) => task.id === taskId);
+
+    if (taskToEdit) {
+      dispatch(
+        openModal({
+          component: 'todo-update',
+          title: 'Update Todo',
+          meta: {
+            id: taskToEdit.id,
+            label: taskToEdit.label,
+            isCompleted: taskToEdit.isCompleted,
+          },
+        })
+      );
+    }
   };
-
-
-  const reversedData = filteredData.slice().reverse();
 
   const handleToggleCompleted = (taskId: number) => {
     dispatch(setToggleCompleteTodo(taskId));
@@ -119,10 +122,9 @@ const Todo = () => {
 
   const handleCheckboxChangeInTodo = (taskId: number) => {
     dispatch(setToggleCompleteTodo(taskId));
-
   };
   const setActive = (tab: string) => {
-    dispatch(setActiveTab(tab)); 
+    dispatch(setActiveTab(tab));
   };
   return (
     <Container>
@@ -137,7 +139,7 @@ const Todo = () => {
           />
         </div>
         <div className="styled-todo-tabs">
-        <Tabs data={tabData} active={activeTab} setActive={setActive} />
+          <Tabs data={tabData} active={activeTab} setActive={setActive} />
 
           <Button
             label="Clear All"
@@ -147,20 +149,14 @@ const Todo = () => {
           />
         </div>
         <div className="styled-todo-tabs-end"></div>
-        {reversedData.map((task) =>
-          editingTaskId === task.id ? (
-            <div className="styled-todo-input">
-
-            </div>
-          ) : (
-            <CheckboxList
-              key={task.id}
-              data={[task]}
-              dropdownData={getDropdownData(task)}
-              onCheckboxChange={() => handleCheckboxChangeInTodo(task.id)}
-            />
-          )
-        )}
+        {reversedData.map((task) => (
+          <CheckboxList
+            key={task.id}
+            data={[task]}
+            dropdownData={getDropdownData(task)}
+            onCheckboxChange={() => handleCheckboxChangeInTodo(task.id)}
+          />
+        ))}
         <div className="styled-todo-list-end"></div>
       </div>
     </Container>
