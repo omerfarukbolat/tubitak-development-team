@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import CardDetailsList, { DataProps } from '../../components/card-detail-list';
 import Container from '../../components/container';
 import './trello.css';
@@ -112,6 +112,7 @@ const Trello = () => {
             label={item.title}
             data={item.data as DataProps[]}
             setData={() => {}}
+            item={{ id: item.id, title: item.title }}
           />
         ))}
       </div>

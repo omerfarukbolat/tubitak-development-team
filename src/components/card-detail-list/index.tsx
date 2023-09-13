@@ -1,9 +1,6 @@
-import React, { useState, KeyboardEvent } from 'react';
-// import Button from '../button';
+import React from 'react';
 import CardDetails from '../card-details';
-// import Input from '../input';
 import './card-detail-list.css';
-import AddCard from '../../modal/body/addCard';
 import Button from '../button';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { openModal } from '../../store/reducers/modalReducer';
@@ -19,6 +16,7 @@ interface CardDetailsListProps {
   dropdownDeleteClick?: (item: DataProps) => void;
   updatedItem?: (item: DataProps) => void;
   addItem?: (item: DataProps) => void;
+  item?: { id: number | undefined; title: string };
 }
 
 export interface DropdownProps {
@@ -35,6 +33,7 @@ export interface DataProps {
 const CardDetailsList: React.FC<CardDetailsListProps> = ({
   label,
   data,
+  item,
   // addInput = false,
   // addButton = false,
   // dropdownTitles = [],
@@ -197,6 +196,7 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
             openModal({
               component: 'add-card',
               title: 'Add Card',
+              meta: { item },
             })
           )
         }

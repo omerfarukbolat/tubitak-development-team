@@ -20,16 +20,14 @@ const getComponent = (cmpnt: string, meta: any, closeModal: () => void) => {
       return <HomeNewCreate meta={meta} closeModal={closeModal} />;
 
     default:
-    case 'update-card':
-      return <UpdateCard meta={meta} closeModal={closeModal} />;
-
     case 'add-title':
       return <AddTitle closeModal={closeModal} />;
 
     case 'add-card':
-      return <AddCard closeModal={closeModal} />;
+      return <AddCard meta={meta} closeModal={closeModal} />;
 
-      return;
+    case 'update-card':
+      return <UpdateCard meta={meta} closeModal={closeModal} />;
   }
 };
 const Modal = () => {
