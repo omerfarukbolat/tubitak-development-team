@@ -1,6 +1,12 @@
 import data from '../../api/dummy_todo.json';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-const initialActiveTab = data.tabData[0].label.toString().toLowerCase(); 
+const initialActiveTab = data.tabData[0].label.toString().toLowerCase();
+
+const dataPropsArray: DataProps[] = data.apiData.map((item) => ({
+    id: item.id,
+    label: item.label,
+    isCompleted: item.isCompleted,
+}));
 
 interface DataProps {
     id: number;
@@ -14,7 +20,7 @@ interface TodoState {
 }
 
 const initialState: TodoState = {
-    data: [],
+    data: dataPropsArray,
     activeTab: initialActiveTab,
 };
 
@@ -48,7 +54,7 @@ const todoSlice = createSlice({
         },
         setActiveTab: (state, action: PayloadAction<string>) => {
             state.activeTab = action.payload;
-          },
+        },
     },
 });
 
