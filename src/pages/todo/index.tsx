@@ -8,6 +8,7 @@ import CheckboxList from '../../components/ckeckbox-list';
 import data from '../../api/dummy_todo.json';
 import { openModal } from '../../store/reducers/modalReducer';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import {
   setAddTodo,
   setRemoveTodo,
@@ -15,20 +16,17 @@ import {
   setToggleCompleteTodo,
   setActiveTab,
   todoFetch,
-  setDidFetched,
 } from '../../store/reducers/todoReducer';
-import { RootState } from '../../store';
-import { useSelector } from 'react-redux';
 
 const Todo = () => {
+  const dispatch = useAppDispatch();
+  const todoData = useAppSelector((state) => state.todo.data);
+  const activeTab = useAppSelector((state) => state.todo.activeTab);
+  const didFetched = useAppSelector((state) => state.todo.didFetched);
   const [newTask, setNewTask] = useState('');
   const [filteredData, setFilteredData] = useState<
     { id: number; label: string; isCompleted: boolean }[]
   >([]);
-  const dispatch = useAppDispatch();
-  const todoData = useSelector((state: RootState) => state.todo.data);
-  const activeTab = useSelector((state: RootState) => state.todo.activeTab);
-  const didFetched = useSelector((state: RootState) => state.todo.didFetched);
 
   const tabData = data.tabData;
   const reversedData = filteredData.slice().reverse();
@@ -36,7 +34,6 @@ const Todo = () => {
   useEffect(() => {
     if (!didFetched) {
       dispatch(todoFetch(data.apiData));
-      dispatch(setDidFetched());
     }
   }, [didFetched, dispatch]);
 
@@ -51,6 +48,7 @@ const Todo = () => {
       setNewTask('');
     }
   };
+
   useEffect(() => {
     const updateFilteredData = () => {
       let filteredTasks:
@@ -133,9 +131,11 @@ const Todo = () => {
   const handleCheckboxChangeInTodo = (taskId: number) => {
     dispatch(setToggleCompleteTodo(taskId));
   };
+
   const setActive = (tab: string) => {
     dispatch(setActiveTab(tab));
   };
+
   return (
     <Container>
       <div className="styled-todo">
@@ -150,7 +150,6 @@ const Todo = () => {
         </div>
         <div className="styled-todo-tabs">
           <Tabs data={tabData} active={activeTab} setActive={setActive} />
-
           <Button
             label="Clear All"
             colour="white"

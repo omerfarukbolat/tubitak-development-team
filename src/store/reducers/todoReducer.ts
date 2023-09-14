@@ -11,13 +11,13 @@ interface DataProps {
 interface TodoState {
     data: DataProps[];
     activeTab: string;
-    didFetched:boolean;
+    didFetched: boolean;
 }
 
 const initialState: TodoState = {
     data: [],
     activeTab: initialActiveTab,
-    didFetched:false,
+    didFetched: false,
 };
 
 const todoSlice = createSlice({
@@ -26,6 +26,7 @@ const todoSlice = createSlice({
     reducers: {
         todoFetch: (state, action: PayloadAction<DataProps[]>) => {
             state.data = action.payload;
+            state.didFetched = true;
         },
         setAddTodo: (state, action: PayloadAction<DataProps>) => {
             state.data.push(action.payload);
@@ -51,12 +52,9 @@ const todoSlice = createSlice({
         setActiveTab: (state, action: PayloadAction<string>) => {
             state.activeTab = action.payload;
         },
-        setDidFetched: (state) => {
-            state.didFetched = true;
-          },
     },
 });
 
-export const { todoFetch, setAddTodo, setRemoveTodo, setUpdateTodo, setRemoveAllTodo, setToggleCompleteTodo, setActiveTab, setDidFetched } = todoSlice.actions;
+export const { todoFetch, setAddTodo, setRemoveTodo, setUpdateTodo, setRemoveAllTodo, setToggleCompleteTodo, setActiveTab } = todoSlice.actions;
 
 export default todoSlice.reducer;
