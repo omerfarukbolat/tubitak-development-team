@@ -70,3 +70,11 @@
 .styled-modal-card-body.withoutTitle {
     padding-top: 35px;
 }
+
+.styled-todo-update-button{
+    margin: 10px;
+    margin-right: 0px;
+    display: flex;
+    float: right;
+    gap: 5px;
+}

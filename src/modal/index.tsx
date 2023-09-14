@@ -5,6 +5,7 @@ import HomeNewCreate from './body/homeNewCreate';
 import useOnClickOutside from '../hooks/useOnClickOutside';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
+import TodoUpdate from './body/todoUpdate';
 
 export interface ModalProps {
   meta?: any;
@@ -15,6 +16,8 @@ const getComponent = (cmpnt: string, meta: any, closeModal: () => void) => {
   switch (cmpnt) {
     case 'home-new-create':
       return <HomeNewCreate meta={meta} closeModal={closeModal} />;
+    case 'todo-update':
+      return <TodoUpdate meta={meta} closeModal={closeModal} />;
 
     default:
       return;
