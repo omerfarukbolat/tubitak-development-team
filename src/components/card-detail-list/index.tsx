@@ -52,7 +52,12 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
       {data.length > 0 && (
         <div className="styled-card-detail-list-cardDetails">
           {data.map((mi) => (
-            <CardDetails key={mi.id} label={mi.name} title={item?.title} />
+            <CardDetails
+              key={mi.id}
+              label={mi.name}
+              title={item?.title}
+              cardItemId={mi.id}
+            />
           ))}
         </div>
       )}

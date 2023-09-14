@@ -35,7 +35,7 @@ const UpdateCard: React.FC<ModalProps> = ({ meta, closeModal }) => {
   }, [meta.name]);
 
   const handleRemoveCard = () => {
-    dispatch(setRemoveTrelloCard());
+    dispatch(setRemoveTrelloCard({ cardId: meta.id, title: meta.title }));
     closeModal();
   };
 

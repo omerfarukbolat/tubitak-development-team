@@ -7,12 +7,14 @@ interface CardDetailsProps {
   label?: string;
   color?: 'white' | 'gray';
   title?: string;
+  cardItemId: number;
 }
 
 const CardDetails: React.FC<CardDetailsProps> = ({
   label,
   color = 'white',
   title,
+  cardItemId,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -24,7 +26,7 @@ const CardDetails: React.FC<CardDetailsProps> = ({
           openModal({
             component: 'update-card',
             title: 'Update Card',
-            meta: { name: label, title: title },
+            meta: { id: cardItemId, name: label, title: title },
           })
         )
       }

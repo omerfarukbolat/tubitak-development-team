@@ -135,8 +135,25 @@ const trelloSlice = createSlice({
     ) => {
       state.data = state.data.filter((item) => item.title !== action.payload);
     },
-    setRemoveTrelloCard: (state, action: PayloadAction<number>) => {
-      state.data = state.data.filter((item) => item.id !== action.payload);
+    setRemoveTrelloCard: (
+      state,
+      action: PayloadAction<{ cardId: number; title: string }>
+    ) => {
+      const filteredData = state.data.find(
+        (item) => item.title === action.payload.title
+      );
+
+      const filteredDataItem = filteredData?.data.find(
+        (item) => item.id === action.payload.cardId
+      );
+
+      const filteredDataItemRemove = filteredData
+        ? filteredData.data.filter((item) => item.id !== action.payload.cardId)
+        : { id: 0, title: '', data: [] };
+      state.data = [
+        ...state.data.filter((item) => item.title !== action.payload.title),
+        { ...filteredData, data: filteredDataItemRemove },
+      ];
     },
   },
 });
