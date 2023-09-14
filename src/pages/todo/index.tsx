@@ -14,6 +14,7 @@ import {
   setRemoveAllTodo,
   setToggleCompleteTodo,
   setActiveTab,
+  todoFetch,
 } from '../../store/reducers/todoReducer';
 import { RootState } from '../../store';
 import { useSelector } from 'react-redux';
@@ -29,6 +30,10 @@ const Todo = () => {
 
   const tabData = data.tabData;
   const reversedData = filteredData.slice().reverse();
+
+  useEffect(() => {
+    dispatch(todoFetch(data.apiData));
+  }, [dispatch]);
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && newTask.trim() !== '') {
