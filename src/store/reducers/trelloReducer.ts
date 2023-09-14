@@ -76,11 +76,78 @@ const trelloSlice = createSlice({
         ];
       }
     },
-    setUpdateTrelloCard: (state, action: PayloadAction<DataProps[]>) => {},
+    setUpdateTrelloCard: (
+      state,
+      action: PayloadAction<{
+        cardName: string;
+        newCardName: string;
+        newStatus: string;
+      }>
+    ) => {
+      const { cardName, newCardName, newStatus } = action.payload;
+
+      let oldStatus: string | null = null;
+      let updatedCardIndex: number | null = null;
+
+      state.data.forEach((statusData) => {
+        const cardIndex = statusData.data.findIndex(
+          (card) => card.name === cardName
+        );
+        if (cardIndex !== -1) {
+          oldStatus = statusData.title;
+          updatedCardIndex = cardIndex;
+        }
+      });
+
+      if (oldStatus !== null && updatedCardIndex !== null) {
+        state.data.forEach((statusData) => {
+          if (statusData.title === oldStatus) {
+            state.data.forEach((statusData) => {
+              statusData.data.splice(updatedCardIndex as number, 1);
+            });
+          }
+        });
+
+        const newCard = {
+          id: new Date().getTime(),
+          name: newCardName,
+        };
+
+        const targetStatusIndex = state.data.findIndex(
+          (item) => item.title === newStatus
+        );
+        if (targetStatusIndex !== -1) {
+          state.data[targetStatusIndex].data.push(newCard);
+        } else {
+          const newStatusData = {
+            id: new Date().getTime(),
+            title: newStatus,
+            data: [newCard],
+          };
+          state.data.push(newStatusData);
+        }
+      }
+    },
+
+    setRemoveTrelloTitle: (
+      state,
+      action: PayloadAction<string | undefined>
+    ) => {
+      state.data = state.data.filter((item) => item.title !== action.payload);
+    },
+    setRemoveTrelloCard: (state, action: PayloadAction<number>) => {
+      state.data = state.data.filter((item) => item.id !== action.payload);
+    },
   },
 });
 
-export const { setTrelloFetch, setAddTrelloTitle, setAddTrelloCard } =
-  trelloSlice.actions;
+export const {
+  setTrelloFetch,
+  setAddTrelloTitle,
+  setAddTrelloCard,
+  setUpdateTrelloCard,
+  setRemoveTrelloTitle,
+  setRemoveTrelloCard,
+} = trelloSlice.actions;
 
 export default trelloSlice.reducer;

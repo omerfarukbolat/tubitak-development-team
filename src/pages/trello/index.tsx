@@ -10,13 +10,11 @@ import { setTrelloFetch } from '../../store/reducers/trelloReducer';
 import dummyDatas from '../../json/dummyTrello.json';
 
 const Trello = () => {
-  // const [data, setData] = useState<DataProps[]>([]);
-
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.trello.data);
   useEffect(() => {
     dispatch(setTrelloFetch(dummyDatas));
-  }, []);
+  }, [dispatch]);
 
   // useEffect(() => {
   //   setData(dummyDatas);

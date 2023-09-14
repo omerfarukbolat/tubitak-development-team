@@ -5,7 +5,7 @@ import HomeNewCreate from './body/homeNewCreate';
 import useOnClickOutside from '../hooks/useOnClickOutside';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
-import UpdateCard from './body/updateCard';
+import UpdateCard from './body/updateCard/updateCard';
 import AddCard from './body/addCard';
 import AddTitle from './body/addTitle';
 
