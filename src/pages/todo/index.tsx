@@ -15,6 +15,7 @@ import {
   setToggleCompleteTodo,
   setActiveTab,
   todoFetch,
+  setDidFetched,
 } from '../../store/reducers/todoReducer';
 import { RootState } from '../../store';
 import { useSelector } from 'react-redux';
@@ -27,13 +28,17 @@ const Todo = () => {
   const dispatch = useAppDispatch();
   const todoData = useSelector((state: RootState) => state.todo.data);
   const activeTab = useSelector((state: RootState) => state.todo.activeTab);
+  const didFetched = useSelector((state: RootState) => state.todo.didFetched);
 
   const tabData = data.tabData;
   const reversedData = filteredData.slice().reverse();
 
   useEffect(() => {
-    dispatch(todoFetch(data.apiData));
-  }, [dispatch]);
+    if (!didFetched) {
+      dispatch(todoFetch(data.apiData));
+      dispatch(setDidFetched());
+    }
+  }, [didFetched, dispatch]);
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && newTask.trim() !== '') {
