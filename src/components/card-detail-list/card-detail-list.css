@@ -71,4 +71,5 @@
   flex-direction: column;
   padding-top: 0px;
   gap: 10px;
+  cursor: pointer;
 }
