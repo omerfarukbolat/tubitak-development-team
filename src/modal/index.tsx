@@ -5,6 +5,9 @@ import HomeNewCreate from './body/homeNewCreate';
 import useOnClickOutside from '../hooks/useOnClickOutside';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
+import UpdateCard from './body/updateCard/updateCard';
+import AddCard from './body/addCard';
+import AddTitle from './body/addTitle';
 import TodoUpdate from './body/todoUpdate';
 
 export interface ModalProps {
@@ -16,14 +19,23 @@ const getComponent = (cmpnt: string, meta: any, closeModal: () => void) => {
   switch (cmpnt) {
     case 'home-new-create':
       return <HomeNewCreate meta={meta} closeModal={closeModal} />;
+
     case 'todo-update':
       return <TodoUpdate meta={meta} closeModal={closeModal} />;
 
+    case 'add-title':
+      return <AddTitle closeModal={closeModal} />;
+
+    case 'add-card':
+      return <AddCard meta={meta} closeModal={closeModal} />;
+
+    case 'update-card':
+      return <UpdateCard meta={meta} closeModal={closeModal} />;
+
     default:
-      return;
+      return <></>;
   }
 };
-
 const Modal = () => {
   const dispatch = useAppDispatch();
   const ref = useRef<HTMLDivElement | null>(null);

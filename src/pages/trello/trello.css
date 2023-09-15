@@ -1,5 +1,22 @@
+.styled-trello-openModal-button {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  margin-top: 30px;
+}
 .styled-trello {
   display: flex;
-  justify-content: space-between;
   margin-top: 100px;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+}
+.styled-trello::-webkit-scrollbar {
+  background-color: yellow;
+  border-radius: 6px;
+  height: 10px;
+}
+.styled-trello::-webkit-scrollbar-thumb {
+  background-color: whitesmoke;
+  border-radius: 6px;
 }
