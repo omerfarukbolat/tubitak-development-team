@@ -6,6 +6,8 @@
 }
 .styled-trello {
   display: flex;
-  justify-content: space-between;
   margin-top: 100px;
+  gap: 10px;
+  overflow: auto;
+  overflow-x: scroll;
 }

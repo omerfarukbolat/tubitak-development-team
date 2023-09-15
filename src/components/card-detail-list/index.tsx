@@ -9,10 +9,8 @@ import { setRemoveTrelloTitle } from '../../store/reducers/trelloReducer';
 interface CardDetailsListProps {
   label?: string;
   data: DataProps[];
-  setData: (data: DataProps[]) => void;
   addInput?: boolean;
   addButton?: boolean;
-  dropdownTitles?: any[];
   dropdownNextClick?: (item: DataProps, nextStatus: string) => void;
   dropdownDeleteClick?: (item: DataProps) => void;
   updatedItem?: (item: DataProps) => void;

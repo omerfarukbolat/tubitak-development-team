@@ -6,7 +6,7 @@ import './addTitle.css';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { setAddTrelloTitle } from '../../../store/reducers/trelloReducer';
 
-const AddTitle: React.FC<ModalProps> = ({ closeModal, meta }) => {
+const AddTitle: React.FC<ModalProps> = ({ closeModal }) => {
   const [value, setValue] = useState('');
 
   const dispatch = useAppDispatch();
@@ -14,6 +14,7 @@ const AddTitle: React.FC<ModalProps> = ({ closeModal, meta }) => {
   const handleAddTitle = () => {
     dispatch(setAddTrelloTitle(value));
     closeModal();
+    setValue('');
   };
 
   return (

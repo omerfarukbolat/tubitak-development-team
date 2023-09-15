@@ -7,9 +7,9 @@ import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { setAddTrelloCard } from '../../../store/reducers/trelloReducer';
 
 const AddCard: React.FC<ModalProps> = ({ closeModal, meta }) => {
+  const dispatch = useAppDispatch();
   const [value, setValue] = useState('');
 
-  const dispatch = useAppDispatch();
   const handleAddCard = () => {
     dispatch(
       setAddTrelloCard({

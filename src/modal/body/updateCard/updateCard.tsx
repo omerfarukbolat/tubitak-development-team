@@ -12,9 +12,10 @@ import {
 import { useAppSelector } from '../../../hooks/useAppSelector';
 
 const UpdateCard: React.FC<ModalProps> = ({ meta, closeModal }) => {
-  const [value, setValue] = useState('');
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.trello.data);
+
+  const [value, setValue] = useState('');
   const [selectedTitle, setSelectedTitle] = useState(meta.title);
 
   const handleUpdateCard = () => {

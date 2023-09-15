@@ -19,7 +19,6 @@ const getComponent = (cmpnt: string, meta: any, closeModal: () => void) => {
     case 'home-new-create':
       return <HomeNewCreate meta={meta} closeModal={closeModal} />;
 
-    default:
     case 'add-title':
       return <AddTitle closeModal={closeModal} />;
 
