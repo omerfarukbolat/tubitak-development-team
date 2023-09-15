@@ -86,38 +86,29 @@ const trelloSlice = createSlice({
     ) => {
       const { cardName, newCardName, newStatus } = action.payload;
 
-      let oldStatus: string | null = null;
-      let updatedCardIndex: number | null = null;
+      const cardToUpdate = state.data
+        .flatMap((statusData) => statusData.data)
+        .find((card) => card.name === cardName);
 
-      state.data.forEach((statusData) => {
-        const cardIndex = statusData.data.findIndex(
-          (card) => card.name === cardName
+      if (cardToUpdate) {
+        const newCard = { ...cardToUpdate, name: newCardName };
+
+        const oldStatus = state.data.find((statusData) =>
+          statusData.data.some((card) => card.name === cardName)
         );
-        if (cardIndex !== -1) {
-          oldStatus = statusData.title;
-          updatedCardIndex = cardIndex;
+
+        if (oldStatus) {
+          oldStatus.data = oldStatus.data.filter(
+            (card) => card.name !== cardName
+          );
         }
-      });
 
-      if (oldStatus !== null && updatedCardIndex !== null) {
-        state.data.forEach((statusData) => {
-          if (statusData.title === oldStatus) {
-            state.data.forEach((statusData) => {
-              statusData.data.splice(updatedCardIndex as number, 1);
-            });
-          }
-        });
-
-        const newCard = {
-          id: new Date().getTime(),
-          name: newCardName,
-        };
-
-        const targetStatusIndex = state.data.findIndex(
-          (item) => item.title === newStatus
+        const targetStatus = state.data.find(
+          (statusData) => statusData.title === newStatus
         );
-        if (targetStatusIndex !== -1) {
-          state.data[targetStatusIndex].data.push(newCard);
+
+        if (targetStatus) {
+          targetStatus.data.push(newCard);
         } else {
           const newStatusData = {
             id: new Date().getTime(),
