@@ -40,7 +40,7 @@ const Trello = () => {
             label={item.title}
             data={item.data as DataProps[]}
             item={{ id: item.id, title: item.title }}
-            cardTitleId={item.id}
+            cardItemId={item.id}
           />
         ))}
       </div>

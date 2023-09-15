@@ -8,5 +8,15 @@
   display: flex;
   margin-top: 100px;
   gap: 10px;
-  overflow: auto;
+  overflow-x: auto;
+  padding-bottom: 20px;
+}
+.styled-trello::-webkit-scrollbar {
+  background-color: yellow;
+  border-radius: 6px;
+  height: 10px;
+}
+.styled-trello::-webkit-scrollbar-thumb {
+  background-color: whitesmoke;
+  border-radius: 6px;
 }

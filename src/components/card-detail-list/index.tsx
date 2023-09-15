@@ -9,10 +9,8 @@ import { setRemoveTrelloTitle } from '../../store/reducers/trelloReducer';
 interface CardDetailsListProps {
   label?: string;
   data: DataProps[];
-  updatedItem?: (item: DataProps) => void;
-  addItem?: (item: DataProps) => void;
   item?: { id: number | undefined; title: string };
-  cardTitleId?: number;
+  cardItemId?: number;
 }
 
 export interface DataProps {
@@ -25,12 +23,12 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
   label,
   data,
   item,
-  cardTitleId,
+  cardItemId,
 }) => {
   const dispatch = useAppDispatch();
 
   const handleRemoveTitle = () => {
-    dispatch(setRemoveTrelloTitle(cardTitleId));
+    dispatch(setRemoveTrelloTitle(cardItemId));
   };
 
   return (
@@ -46,19 +44,8 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
             <CardDetails
               key={mi.id}
               label={mi.name}
-              onClick={() =>
-                dispatch(
-                  openModal({
-                    component: 'update-card',
-                    title: 'Update Card',
-                    meta: {
-                      cardItemId: mi.id,
-                      label: mi.name,
-                      title: item?.title,
-                    },
-                  })
-                )
-              }
+              title={item?.title}
+              cardItemId={mi.id}
             />
           ))}
         </div>

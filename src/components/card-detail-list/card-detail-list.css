@@ -1,7 +1,7 @@
 .styled-card-detail-list {
   display: inline-flex;
   flex-direction: column;
-  width: 290px;
+  min-width: 290px;
   min-height: 100px;
   background-color: whitesmoke;
   border: 1px;
