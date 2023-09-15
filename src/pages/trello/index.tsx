@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import CardDetailsList, { DataProps } from '../../components/card-detail-list';
 import Container from '../../components/container';
 import './trello.css';
-import dummyDatas from '../../json/dummyTrello.json';
+import dummyData from '../../json/dummyTrello.json';
 
 const Trello = () => {
   const [data, setData] = useState<DataProps[]>([]);
 
   useEffect(() => {
-    setData(dummyDatas);
+    setData(dummyData);
   }, []);
 
   const onlyStatusAddInArr = (data: DataProps[]) => {

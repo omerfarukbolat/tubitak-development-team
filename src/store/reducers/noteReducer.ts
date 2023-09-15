@@ -4,15 +4,17 @@ interface DataProps {
     id: number;
     title: string;
     description: string;
-    date: Date;
+    date: string;
 }
 
 interface NoteState {
     data: DataProps[];
+    didFetched: boolean;
 }
 
 const initialState: NoteState = {
     data: [],
+    didFetched: false,
 };
 
 const noteSlice = createSlice({
@@ -21,10 +23,31 @@ const noteSlice = createSlice({
     reducers: {
         noteFetch: (state, action: PayloadAction<DataProps[]>) => {
             state.data = action.payload;
+            state.didFetched = true;
         },
+        setAddNote: (state, action: PayloadAction<DataProps>) => {
+            state.data = [...state.data, action.payload]; // add data'ya çevir.
+        },
+       
+        setRemoveNote: (state, action: PayloadAction<number>) => {
+            state.data = state.data.filter((note) => note.id !== action.payload);
+        },
+        setUpdateNote: (state, action: PayloadAction<DataProps>) => {
+            
+            const existingNoteIndex = state.data.findIndex((note) => note.id === action.payload.id);
+            if (existingNoteIndex !== -1) {
+            //   state.data = [
+            //     ...state.data.slice(0,existingNoteIndex),
+            //     {id, title, description, date: state.data[existingNoteIndex].date},
+            //     ...state.data.slice(existingNoteIndex + 1),
+            //   ]
+            state.data[existingNoteIndex] = action.payload; 
+            }
+        }
+
     },
 });
 
-export const { noteFetch } = noteSlice.actions;
+export const { noteFetch, setAddNote, setUpdateNote, setRemoveNote } = noteSlice.actions;
 
 export default noteSlice.reducer;

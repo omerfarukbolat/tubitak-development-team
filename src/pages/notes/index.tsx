@@ -1,57 +1,42 @@
-import React, { useState } from 'react';
-import AddNote, { NoteItemProps } from '../../components/addNote';
+//pages/notes/index.tsx
+import React, { useEffect } from 'react';
+import AddNote from '../../components/addNote';
 import Container from '../../components/container';
 import './notes.css';
 import Note from '../../components/note';
 import '../../components/note/note.css';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { noteFetch } from '../../store/reducers/noteReducer';
+import dummyNote from '../../json/dummyNote.json';
 
-const dummyNote: NoteItemProps[] = [
-  {
-    id: 1,
-    title: 'Note Example 1',
-    description: 'That is a note example description',
-    date: new Date('2023-07-21'),
-  },
-
-  {
-    id: 2,
-    title: 'Note Example 2',
-    description: 'That is a description for note example 2',
-    date: new Date('2023-07-20'),
-  },
-];
+import {setRemoveNote} from '../../store/reducers/noteReducer'
 
 const Notes: React.FC = () => {
-  const [notes, setNotes] = useState<NoteItemProps[]>(dummyNote);
+  const dispatch = useAppDispatch();
 
-  const handleAddNote = (newNote: NoteItemProps) => {
-    setNotes((prevNotes) => [
-      ...prevNotes,
-      { ...newNote, id: new Date().getTime() },
-    ]);
-  };
+  const data = useAppSelector((state) => state.note.data);
 
-  const handleEditNote = (id: number, updatedData: Partial<NoteItemProps>) => {
-    setNotes((prevNotes) =>
-      prevNotes.map((note) =>
-        note.id === id ? { ...note, ...updatedData } : note
-      )
-    );
-  };
+  useEffect(() => {
+    dispatch(noteFetch(dummyNote));
+  }, [dispatch]);
 
-  const handleDeleteNote = (id: number) => {
-    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
-  };
+  
+
+   const handleDeleteNote = (id: number) => {
+    dispatch(setRemoveNote(id));
+   };
+
+   console.log(data);
 
   return (
     <Container>
       <div className="styled-note-list">
-        <AddNote onAddNote={handleAddNote} />
-        {notes.map((note) => (
+        <AddNote onAddNote={() => {}} />
+        {data.map((note) => (
           <Note
             key={note.id}
             data={note}
-            onEditNote={handleEditNote}
             onDeleteNote={handleDeleteNote}
           />
         ))}

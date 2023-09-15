@@ -5,6 +5,8 @@ import HomeNewCreate from './body/homeNewCreate';
 import useOnClickOutside from '../hooks/useOnClickOutside';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
+import AddNewCreate from './body/AddNewCreate';
+import UpdateNoteItem from './body/updateNoteItem';
 
 export interface ModalProps {
   meta?: any;
@@ -15,6 +17,10 @@ const getComponent = (cmpnt: string, meta: any, closeModal: () => void) => {
   switch (cmpnt) {
     case 'home-new-create':
       return <HomeNewCreate meta={meta} closeModal={closeModal} />;
+    case 'add-new-create':
+      return <AddNewCreate meta={meta} closeModal={closeModal} />;
+    case 'update-note-item':
+      return <UpdateNoteItem meta={meta} closeModal={closeModal} />;
 
     default:
       return;
