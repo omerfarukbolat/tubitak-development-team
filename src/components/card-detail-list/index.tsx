@@ -9,18 +9,10 @@ import { setRemoveTrelloTitle } from '../../store/reducers/trelloReducer';
 interface CardDetailsListProps {
   label?: string;
   data: DataProps[];
-  addInput?: boolean;
-  addButton?: boolean;
-  dropdownNextClick?: (item: DataProps, nextStatus: string) => void;
-  dropdownDeleteClick?: (item: DataProps) => void;
   updatedItem?: (item: DataProps) => void;
   addItem?: (item: DataProps) => void;
   item?: { id: number | undefined; title: string };
-}
-
-export interface DropdownProps {
-  name: string;
-  click: () => void;
+  cardTitleId?: number;
 }
 
 export interface DataProps {
@@ -33,11 +25,12 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
   label,
   data,
   item,
+  cardTitleId,
 }) => {
   const dispatch = useAppDispatch();
 
   const handleRemoveTitle = () => {
-    dispatch(setRemoveTrelloTitle(label));
+    dispatch(setRemoveTrelloTitle(cardTitleId));
   };
 
   return (
@@ -49,12 +42,12 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
       <div className="styled-card-detail-list-label">{label}</div>
       {data.length > 0 && (
         <div className="styled-card-detail-list-cardDetails">
-          {data.map((mi) => (
+          {data.map((mapItem) => (
             <CardDetails
-              key={mi.id}
-              label={mi.name}
+              key={mapItem.id}
+              label={mapItem.name}
               title={item?.title}
-              cardItemId={mi.id}
+              cardItemId={mapItem.id}
             />
           ))}
         </div>

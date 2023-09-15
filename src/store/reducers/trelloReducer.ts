@@ -131,9 +131,9 @@ const trelloSlice = createSlice({
 
     setRemoveTrelloTitle: (
       state,
-      action: PayloadAction<string | undefined>
+      action: PayloadAction<number | undefined>
     ) => {
-      state.data = state.data.filter((item) => item.title !== action.payload);
+      state.data = state.data.filter((item) => item.id !== action.payload);
     },
     setRemoveTrelloCard: (
       state,
