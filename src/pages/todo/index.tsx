@@ -6,16 +6,36 @@ import Tabs from '../../components/tabs';
 import Button from '../../components/button';
 import CheckboxList from '../../components/ckeckbox-list';
 import data from '../../api/dummy_todo.json';
+import { openModal } from '../../store/reducers/modalReducer';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import {
+  setAddTodo,
+  setRemoveTodo,
+  setRemoveAllTodo,
+  setToggleCompleteTodo,
+  setActiveTab,
+  todoFetch,
+} from '../../store/reducers/todoReducer';
 
 const Todo = () => {
-  const [activeTab, setActiveTab] = useState('all');
+  const dispatch = useAppDispatch();
+  const todoData = useAppSelector((state) => state.todo.data);
+  const activeTab = useAppSelector((state) => state.todo.activeTab);
+  const didFetched = useAppSelector((state) => state.todo.didFetched);
   const [newTask, setNewTask] = useState('');
-  const [apiData, setApiData] = useState(data.apiData || []);
-  const [filteredData, setFilteredData] = useState(apiData);
-  const [editedTask, setEditedTask] = useState('');
-  const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
+  const [filteredData, setFilteredData] = useState<
+    { id: number; label: string; isCompleted: boolean }[]
+  >([]);
 
   const tabData = data.tabData;
+  const reversedData = filteredData.slice().reverse();
+
+  useEffect(() => {
+    if (!didFetched) {
+      dispatch(todoFetch(data.apiData));
+    }
+  }, [didFetched, dispatch]);
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && newTask.trim() !== '') {
@@ -24,7 +44,7 @@ const Todo = () => {
         label: newTask,
         isCompleted: false,
       };
-      setApiData([...apiData, newTaskItem]);
+      dispatch(setAddTodo(newTaskItem));
       setNewTask('');
     }
   };
@@ -36,22 +56,21 @@ const Todo = () => {
         | undefined;
 
       if (activeTab === 'completed') {
-        filteredTasks = apiData.filter((task) => task.isCompleted === true);
+        filteredTasks = todoData.filter((task) => task.isCompleted === true);
       } else if (activeTab === 'pending') {
-        filteredTasks = apiData.filter((task) => task.isCompleted === false);
+        filteredTasks = todoData.filter((task) => task.isCompleted === false);
       } else if (activeTab === 'all') {
-        filteredTasks = apiData;
+        filteredTasks = todoData;
       }
 
       setFilteredData(filteredTasks || []);
     };
 
     updateFilteredData();
-  }, [activeTab, apiData]);
+  }, [activeTab, todoData]);
 
   const handleClearAll = () => {
-    const updatedApiData = apiData.filter((task) => !task.isCompleted);
-    setApiData(updatedApiData);
+    dispatch(setRemoveAllTodo());
   };
 
   const getDropdownData = (task: {
@@ -84,42 +103,37 @@ const Todo = () => {
   };
 
   const handleDeleteTask = (taskId: number) => {
-    const updatedApiData = apiData.filter((task) => task.id !== taskId);
-    setApiData(updatedApiData);
-  };
-
-  const handleUpdateTask = (taskId: number) => {
-    const updatedApiData = apiData.map((task) =>
-      task.id === taskId ? { ...task, label: editedTask } : task
-    );
-    setApiData(updatedApiData);
-    setEditingTaskId(null);
+    dispatch(setRemoveTodo(taskId));
   };
 
   const handleEditTask = (taskId: number) => {
-    setEditingTaskId(taskId);
-    setEditedTask(apiData.find((task) => task.id === taskId)?.label || '');
-  };
+    const taskToEdit = todoData.find((task) => task.id === taskId);
 
-  const cancelEdit = () => {
-    setEditingTaskId(null);
-    setEditedTask('');
+    if (taskToEdit) {
+      dispatch(
+        openModal({
+          component: 'todo-update',
+          title: 'Update Todo',
+          meta: {
+            id: taskToEdit.id,
+            label: taskToEdit.label,
+            isCompleted: taskToEdit.isCompleted,
+          },
+        })
+      );
+    }
   };
-
-  const reversedData = filteredData.slice().reverse();
 
   const handleToggleCompleted = (taskId: number) => {
-    const updatedApiData = apiData.map((task) =>
-      task.id === taskId ? { ...task, isCompleted: !task.isCompleted } : task
-    );
-    setApiData(updatedApiData);
+    dispatch(setToggleCompleteTodo(taskId));
   };
 
   const handleCheckboxChangeInTodo = (taskId: number) => {
-    const updatedApiData = apiData.map((task) =>
-      task.id === taskId ? { ...task, isCompleted: !task.isCompleted } : task
-    );
-    setApiData(updatedApiData);
+    dispatch(setToggleCompleteTodo(taskId));
+  };
+
+  const setActive = (tab: string) => {
+    dispatch(setActiveTab(tab));
   };
 
   return (
@@ -135,8 +149,7 @@ const Todo = () => {
           />
         </div>
         <div className="styled-todo-tabs">
-          <Tabs data={tabData} active={activeTab} setActive={setActiveTab} />
-
+          <Tabs data={tabData} active={activeTab} setActive={setActive} />
           <Button
             label="Clear All"
             colour="white"
@@ -145,31 +158,14 @@ const Todo = () => {
           />
         </div>
         <div className="styled-todo-tabs-end"></div>
-        {reversedData.map((task) =>
-          editingTaskId === task.id ? (
-            <div className="styled-todo-input">
-              <Input
-                value={editedTask}
-                onChange={(newValue) => setEditedTask(newValue)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    handleUpdateTask(task.id);
-                  } else if (e.key === 'Escape') {
-                    cancelEdit();
-                  }
-                }}
-                maxWidth
-              />
-            </div>
-          ) : (
-            <CheckboxList
-              key={task.id}
-              data={[task]}
-              dropdownData={getDropdownData(task)}
-              onCheckboxChange={() => handleCheckboxChangeInTodo(task.id)}
-            />
-          )
-        )}
+        {reversedData.map((task) => (
+          <CheckboxList
+            key={task.id}
+            data={[task]}
+            dropdownData={getDropdownData(task)}
+            onCheckboxChange={() => handleCheckboxChangeInTodo(task.id)}
+          />
+        ))}
         <div className="styled-todo-list-end"></div>
       </div>
     </Container>
