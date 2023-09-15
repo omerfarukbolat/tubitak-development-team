@@ -1,57 +1,63 @@
-import React, { useState } from 'react';
-import AddNote, { NoteItemProps } from '../../components/addNote';
+//pages/notes/index.tsx
+import React, { useEffect } from 'react';
+import AddNote from '../../components/addNote';
 import Container from '../../components/container';
 import './notes.css';
-import Note from '../../components/note';
+import Note, { NoteDataProps } from '../../components/note';
 import '../../components/note/note.css';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { noteFetch } from '../../store/reducers/noteReducer';
+import dummyNote from '../../json/dummyNote.json';
 
-const dummyNote: NoteItemProps[] = [
-  {
-    id: 1,
-    title: 'Note Example 1',
-    description: 'That is a note example description',
-    date: new Date('2023-07-21'),
-  },
-
-  {
-    id: 2,
-    title: 'Note Example 2',
-    description: 'That is a description for note example 2',
-    date: new Date('2023-07-20'),
-  },
-];
+import { setRemoveNote } from '../../store/reducers/noteReducer';
+import { openModal } from '../../store/reducers/modalReducer';
 
 const Notes: React.FC = () => {
-  const [notes, setNotes] = useState<NoteItemProps[]>(dummyNote);
+  const dispatch = useAppDispatch();
+  const data = useAppSelector((state) => state.note.data);
 
-  const handleAddNote = (newNote: NoteItemProps) => {
-    setNotes((prevNotes) => [
-      ...prevNotes,
-      { ...newNote, id: new Date().getTime() },
-    ]);
-  };
+  useEffect(() => {
+    dispatch(noteFetch(dummyNote));
+  }, [dispatch]);
 
-  const handleEditNote = (id: number, updatedData: Partial<NoteItemProps>) => {
-    setNotes((prevNotes) =>
-      prevNotes.map((note) =>
-        note.id === id ? { ...note, ...updatedData } : note
-      )
+  const handleUpdateNote = (item: NoteDataProps) => {
+    dispatch(
+      openModal({
+        component: 'update-note-item',
+        title: 'Update Item',
+        meta: {
+          id: item.id,
+          title: item.title,
+          description: item.description,
+          date: item.date,
+        },
+      })
     );
   };
 
   const handleDeleteNote = (id: number) => {
-    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+    dispatch(setRemoveNote(id));
   };
 
   return (
     <Container>
       <div className="styled-note-list">
-        <AddNote onAddNote={handleAddNote} />
-        {notes.map((note) => (
+        <AddNote
+          onAddNote={() =>
+            dispatch(
+              openModal({
+                component: 'add-new-create',
+                title: 'New Note',
+              })
+            )
+          }
+        />
+        {data.map((note) => (
           <Note
             key={note.id}
             data={note}
-            onEditNote={handleEditNote}
+            onEditNote={handleUpdateNote}
             onDeleteNote={handleDeleteNote}
           />
         ))}
