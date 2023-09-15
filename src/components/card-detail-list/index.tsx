@@ -42,12 +42,23 @@ const CardDetailsList: React.FC<CardDetailsListProps> = ({
       <div className="styled-card-detail-list-label">{label}</div>
       {data.length > 0 && (
         <div className="styled-card-detail-list-cardDetails">
-          {data.map((mapItem) => (
+          {data.map((mi) => (
             <CardDetails
-              key={mapItem.id}
-              label={mapItem.name}
-              title={item?.title}
-              cardItemId={mapItem.id}
+              key={mi.id}
+              label={mi.name}
+              onClick={() =>
+                dispatch(
+                  openModal({
+                    component: 'update-card',
+                    title: 'Update Card',
+                    meta: {
+                      cardItemId: mi.id,
+                      label: mi.name,
+                      title: item?.title,
+                    },
+                  })
+                )
+              }
             />
           ))}
         </div>
