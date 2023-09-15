@@ -1,0 +1,9 @@
+.styled-add-card-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.styled-add-card-input {
+  margin-bottom: 10px;
+}

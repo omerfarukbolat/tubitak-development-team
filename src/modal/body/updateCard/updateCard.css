@@ -1,0 +1,11 @@
+.styled-updatedCard {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.styled-updatedCard-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}

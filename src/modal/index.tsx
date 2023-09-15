@@ -7,6 +7,10 @@ import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import AddNewCreate from './body/AddNewCreate';
 import UpdateNoteItem from './body/updateNoteItem';
+import UpdateCard from './body/updateCard/updateCard';
+import AddCard from './body/addCard';
+import AddTitle from './body/addTitle';
+import TodoUpdate from './body/todoUpdate';
 
 export interface ModalProps {
   meta?: any;
@@ -21,12 +25,19 @@ const getComponent = (cmpnt: string, meta: any, closeModal: () => void) => {
       return <AddNewCreate meta={meta} closeModal={closeModal} />;
     case 'update-note-item':
       return <UpdateNoteItem meta={meta} closeModal={closeModal} />;
+    case 'todo-update':
+      return <TodoUpdate meta={meta} closeModal={closeModal} />;
+    case 'add-title':
+      return <AddTitle closeModal={closeModal} />;
+    case 'add-card':
+      return <AddCard meta={meta} closeModal={closeModal} />;
+    case 'update-card':
+      return <UpdateCard meta={meta} closeModal={closeModal} />;
 
     default:
-      return;
+      return <></>;
   }
 };
-
 const Modal = () => {
   const dispatch = useAppDispatch();
   const ref = useRef<HTMLDivElement | null>(null);
@@ -40,8 +51,8 @@ const Modal = () => {
     dispatch(closeModal());
   };
 
-  return (
-    <div className={`styled-modal ${component ? 'open' : 'close'}`}>
+  return component ? (
+    <div className="styled-modal">
       <div ref={ref} className="styled-modal-card">
         <div
           className="styled-modal-card-close"
@@ -55,6 +66,8 @@ const Modal = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <></>
   );
 };
 

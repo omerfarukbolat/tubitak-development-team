@@ -5,17 +5,10 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1000000;
-}
-
-.styled-modal.open {
-    display: flex;
-}
-
-.styled-modal.close {
-    display: none;
 }
 
 .styled-modal-card {
@@ -76,4 +69,12 @@
 
 .styled-modal-card-body.withoutTitle {
     padding-top: 35px;
+}
+
+.styled-todo-update-button{
+    margin: 10px;
+    margin-right: 0px;
+    display: flex;
+    float: right;
+    gap: 5px;
 }
